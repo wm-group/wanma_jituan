@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wanma_jituan/common/config/config.dart';
+import 'package:wanma_jituan/common/dao/data_dao.dart';
+import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
@@ -14,9 +17,12 @@ class GridItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: CommonUtils.renderTab(Icons.line_style, text,size: 32.0,color: Theme.of(context).primaryColor),
-     onTap: () {
+     onTap: () async{
         switch(functionName) {
           case 'goHomeGfz':
+            var userName = await LocalStorage.get(Config.USER_NAME_KEY);
+            var password = await LocalStorage.get(Config.PW_KEY);
+            DataDao.getAuthority(userName, password);
             NavigatorUtils.goHomeGfz(context,mid);
             break;
           case 'goOrderStatus':

@@ -106,7 +106,7 @@ class HomeDrawer extends StatelessWidget {
                           height: ScreenUtil().setHeight(380),
                           child: UserAccountsDrawerHeader(
                             accountName: Container(
-                              child: Text(store.state.userInfo.userName, style: WMConstant.lagerTextWhite,),
+                              child: Text(store.state.userInfo.userName ?? '', style: WMConstant.lagerTextWhite,),
                             ),
                             accountEmail: Text('高分子', style: WMConstant.middleTextWhite,),
                             currentAccountPicture: GestureDetector(

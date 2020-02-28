@@ -31,8 +31,6 @@ class UserDao {
       'password': password
     };
 
-    HttpManager.clearAuthorization();
-
     var res = await HttpManager.netFetch(UrlConstant.getLogin(), requestParams, null, Options(method: 'post'));
     var resultData;
     if(res != null && res.result) {
@@ -97,7 +95,6 @@ class UserDao {
 //  }
   
   static clearAll(Store store) async {
-    HttpManager.clearAuthorization();
     LocalStorage.remove(Config.USER_INFO);
     store.dispatch(new UpdateUserAction(User.empty()));
   }

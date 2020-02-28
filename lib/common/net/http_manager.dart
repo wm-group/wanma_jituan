@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:wanma_jituan/common/config/config.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
@@ -11,11 +13,24 @@ class HttpManager {
   static const CONTENT_TYPE_JSON = 'application/json';
   static const CONTENT_TYPE_FORM = 'application/x-www-form-urlencoded';
 
-  static Map optionParams = {
-    'timeoutMs': 10000,
-    'token': null,
-    'authorizationCode': null,
-  };
+  static Dio _dio;
+  static BaseOptions orgOption;
+
+  static const int CONNECT_TIMEOUT = 10000;
+  static const int RECEIVE_TIMEOUT = 3000;
+
+  static Dio createInstance() {
+    if(_dio == null) {
+      orgOption = BaseOptions(
+        contentType: CONTENT_TYPE_JSON,
+        connectTimeout: CONNECT_TIMEOUT,
+        receiveTimeout: RECEIVE_TIMEOUT,
+      );
+      _dio = Dio(orgOption);
+      _dio.interceptors.add(CookieManager(CookieJar()));
+    }
+    return _dio;
+  }
 
   ///发起网络请求
   ///[ url] 请求url
@@ -35,15 +50,6 @@ class HttpManager {
       headers.addAll(header);
     }
 
-    if(optionParams['authorizationCode'] == null) {
-      var authorizationCode = await getAuthorization();
-      if(authorizationCode != null) {
-        optionParams['authorizationCode'] = authorizationCode;
-      }
-    }
-
-    headers['Authorization'] = optionParams['authorizationCode'];
-
     if(option != null) {
       option.headers = headers;
     }else {
@@ -51,10 +57,7 @@ class HttpManager {
       option.headers = headers;
     }
 
-    ///超时
-    option.connectTimeout = optionParams['timeoutMs'];
-
-    Dio dio = Dio();
+    Dio dio = createInstance();
     Response response;
     try{
       response = await dio.request(url,queryParameters: params,options: option);
@@ -85,47 +88,11 @@ class HttpManager {
       if (response != null) {
         print('返回参数: ' + response.toString());
       }
-      if (optionParams["authorizationCode"] != null) {
-        print('authorizationCode: ' + optionParams["authorizationCode"]);
-      }
-    }
-
-    if(option.contentType != null && option.contentType.primaryType == 'text') {
-      return ResultData(response.data, true, Code.SUCCESS);
-    }else {
-      var responseJson = response.data;
-
-      if(response.statusCode == 200) {
-        try{
-          if(responseJson['result']['token'] != null) {
-            optionParams['authorizationCode'] = responseJson['result']['token'];
-            await LocalStorage.save(Config.TOKEN_KEY, optionParams['authorizationCode']);
-          }
-        }catch (e) {
-        }
-      }
     }
 
     if(response.statusCode == 200) {
       return ResultData(response.data, true, Code.SUCCESS, headers: response.headers);
     }
     return ResultData(Code.errorHandleFunction(response.statusCode, '', noTip), false, response.statusCode);
-  }
-
-  ///清除授权
-  static clearAuthorization() {
-    optionParams['authorizationCode'] = null;
-    LocalStorage.remove(Config.TOKEN_KEY);
-  }
-
-  ///获取授权token
-  static getAuthorization() async{
-    String token = await LocalStorage.get(Config.TOKEN_KEY);
-    if(token == null) {
-      //提示输入账号密码
-    }else {
-      optionParams['authorizationCode'] = token;
-      return token;
-    }
   }
 }

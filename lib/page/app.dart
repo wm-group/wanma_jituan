@@ -20,12 +20,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> with SingleTickerProviderStateMixin{
 
-  var _currentIndex = 0;
-
-  PageController _pageController;
-
-  var _futureStr;
-
   /// 提示退出
   Future<bool> _dialogExitApp(BuildContext context) {
     return showDialog(

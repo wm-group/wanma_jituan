@@ -4,6 +4,8 @@ import 'package:wanma_jituan/page/app.dart';
 import 'package:wanma_jituan/page/common/question_submission.dart';
 import 'package:wanma_jituan/page/common/update_pwd.dart';
 import 'package:wanma_jituan/page/common/version_update.dart';
+import 'package:wanma_jituan/page/gfz/service/order_details.dart';
+import 'package:wanma_jituan/page/gfz/service/order_goods_follow.dart';
 import 'package:wanma_jituan/page/gfz/service/order_status.dart';
 import 'package:wanma_jituan/page/login_page.dart';
 import 'package:wanma_jituan/page/Gfz/gfz_home_page.dart';
@@ -36,6 +38,24 @@ class NavigatorUtils {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => OrderStatus(),
+      ),
+    );
+  }
+
+  ///订单状态明细页
+  static goOrderDetails(BuildContext context, String cusId) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => OrderDetails(cusId: cusId),
+      ),
+    );
+  }
+
+  ///订单物流跟踪明细
+  static goOrderGoodsFollow(BuildContext context, String vbeln, String posnr) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => OrderGoodsFollow(vbeln, posnr),
       ),
     );
   }

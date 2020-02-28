@@ -113,12 +113,8 @@ class _ItemMenuState extends State<ItemMenu> with AutomaticKeepAliveClientMixin<
   }
 
   Future _handleRefresh() async {
-    String token = await HttpManager.getAuthorization();
-    String mid = '0';
-    String allTag = '0';
-    String m = 'HTAPP';
     setState(() {
-      _futureStr = DataDao.getAppMenu(token, mid, allTag, m);
+      _futureStr = _getAppMenu();
     });
   }
 
