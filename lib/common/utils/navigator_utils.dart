@@ -60,6 +60,15 @@ class NavigatorUtils {
     );
   }
 
+  ///发货需求明细
+  static goDeliverRequire(BuildContext context, String vbeln, String posnr) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => OrderGoodsFollow(vbeln, posnr),
+      ),
+    );
+  }
+
   /*///一次发泡
   ///生产线列表
   static goFirstBubbleList(BuildContext context, String mid) {

@@ -12,14 +12,14 @@ class OrderDetails extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('订单明细'),
-          actions: <Widget>[
-            FlatButton(
-                onPressed: () {
-                  //TODO 跳转到发货需求页面
-                },
-                child: Text('发货需求')
-            ),
-          ],
+//          actions: <Widget>[
+//            FlatButton(
+//                onPressed: () {
+//                  //TODO 跳转到发货需求页面
+//                },
+//                child: Text('发货需求')
+//            ),
+//          ],
         ),
         body: OrderDetailsBody(cusId)
     );
@@ -129,7 +129,8 @@ class _OrderDetailsTableState extends State<OrderDetailsTable> {
                 return ListView(
                   children: <Widget>[
                     DataTable(
-                      columnSpacing: 8,
+                      columnSpacing: 4,
+                      horizontalMargin: 4,
                       sortColumnIndex: _sortColumnIndex,
                       sortAscending: _sortAscending,
                       columns: [
