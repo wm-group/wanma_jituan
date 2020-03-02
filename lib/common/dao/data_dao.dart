@@ -71,5 +71,17 @@ class DataDao {
       return null;
     }
   }
+//基准价数据
+static Future getBasePriceData(bukrs) async{
+  Map<String,dynamic> requestParams = {
+    'bukrs':bukrs
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getBasePrice(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
 
+}
 }

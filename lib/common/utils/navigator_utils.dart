@@ -10,6 +10,7 @@ import 'package:wanma_jituan/page/gfz/service/order_status.dart';
 import 'package:wanma_jituan/page/login_page.dart';
 import 'package:wanma_jituan/page/Gfz/gfz_home_page.dart';
 import 'package:wanma_jituan/page/common/param_setting.dart';
+import 'package:wanma_jituan/page/gfz/service/base_price.dart';
 
 ///导航栏
 class NavigatorUtils {

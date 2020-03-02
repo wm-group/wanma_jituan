@@ -30,4 +30,10 @@ class UrlConstant {
   static updatePwd() {
     return '${host}androidWeb/loginService/changePwdNew.do';
   }
+
+  //基准价
+  static getBasePrice(){
+    return '${host}wmgfzandroid/GfzSdService/jzjmessage.do';
+
+  }
 }
