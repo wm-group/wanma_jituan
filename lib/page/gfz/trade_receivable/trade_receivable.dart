@@ -93,12 +93,12 @@ _titleTableRow(modelList){
          color: Colors.blue,
         ),
       children: [
-        _sortTitleWidget(modelList, '客户↑↓', 'customer'),
-        _sortTitleWidget(modelList, '应收总额(万)↑↓', 'ysze'),
-        _sortTitleWidget(modelList, '本月计划回款(万)↑↓', 'yshk'),
-        _sortTitleWidget(modelList, '本月回款(万)↑↓', 'yhk'),
-        _sortTitleWidget(modelList, '约定账期↑↓', 'ydzq'),
-        _sortTitleWidget(modelList, '实际账期↑↓', 'sjhlzq'),
+        _sortTitleWidget(modelList, '客户↓', 'customer'),
+        _sortTitleWidget(modelList, '应收总额(万)↓', 'ysze'),
+        _sortTitleWidget(modelList, '本月计划回款(万)↓', 'yshk'),
+        _sortTitleWidget(modelList, '本月回款(万)↓', 'yhk'),
+        _sortTitleWidget(modelList, '约定账期↓', 'ydzq'),
+        _sortTitleWidget(modelList, '实际账期↓', 'sjhlzq'),
           ]
     );
 }

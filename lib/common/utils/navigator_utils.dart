@@ -59,12 +59,12 @@ class NavigatorUtils {
   static goOrderStatus(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        // builder: (context) => OrderStatus(),
+        builder: (context) => OrderStatus(),
         // builder: (context) => IssueSituation(),
         // builder: (context) => TargetSituation(),
         //  builder: (context) => BasePrice(),
         // builder: (context) => TradeReceivable(),
-        builder: (context) => LogisticsTracking(),
+        // builder: (context) => LogisticsTracking(),
 
       ),
     );
@@ -78,7 +78,42 @@ class NavigatorUtils {
       ),
     );
   }
-
+///发出情况
+  static goIssueSituation(BuildContext context ) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => IssueSituation(),
+      ),
+    );
+  }///目标情况
+  static goTargetSituation(BuildContext context,) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => TargetSituation(),
+      ),
+    );
+  }///基准价
+  static goBasePrice(BuildContext context,  ) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => BasePrice(),
+      ),
+    );
+  }///应收货款
+  static goTradeReceivable(BuildContext context,  ) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => TradeReceivable(),
+      ),
+    );
+  }///物流跟踪
+  static goLogisticsTracking(BuildContext context,  ) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => LogisticsTracking(),
+      ),
+    );
+  }
   ///订单物流跟踪明细
   static goOrderGoodsFollow(BuildContext context, String vbeln, String posnr) {
     Navigator.of(context).push(
