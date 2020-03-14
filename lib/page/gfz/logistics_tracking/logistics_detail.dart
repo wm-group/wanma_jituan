@@ -32,7 +32,7 @@ class _LogisticsDetailState extends State<LogisticsDetail> {
     return Scaffold(
       appBar: AppBar(
         title:Text('物流明细'),
-        
+        centerTitle: true,
       ),
       
       body: FutureBuilder(

@@ -233,7 +233,10 @@ static Future getTradeDetailData(bukrs,kunnr) async{
   };
   var res = await HttpManager.netFetch(UrlConstant.getTradeDetail(), requestParams, null, Options(method: 'post'));
    if(res != null && res.result) {
-   }
+   return res.data;
+    }else {
+      return null;
+    }
   }
 
   //已开票
