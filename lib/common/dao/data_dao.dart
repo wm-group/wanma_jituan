@@ -71,17 +71,177 @@ class DataDao {
       return null;
     }
   }
+
 //基准价数据
-static Future getBasePriceData(bukrs) async{
-  Map<String,dynamic> requestParams = {
-    'bukrs':bukrs
+static Future getBasePriceData(bukrs) async {
+  Map<String, dynamic> requestParams = {
+    'bukrs': bukrs
   };
-  var res = await HttpManager.netFetch(UrlConstant.getBasePrice(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
+  var res = await HttpManager.netFetch(
+      UrlConstant.getBasePrice(), requestParams, null, Options(method: 'post'));
+  if (res != null && res.result) {
+    return res.data;
+  } else {
+    return null;
+  }
+}
+  //发货需求明细
+  static Future getDeliverRequireData(vbeln) async{
+
+    Map<String, dynamic> requestParams = {
+      'vbeln': vbeln
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverRequire(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
       return res.data;
     }else {
       return null;
     }
+  }
 
-}
+  //发货需求编辑页
+  static Future getDeliverEditData(vbeln) async{
+
+    Map<String, dynamic> requestParams = {
+      'vbeln': vbeln
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverEdit(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //发货需求编辑页保存功能
+  static Future deliverEditSave(userName, action, data) async{
+
+    Map<String, dynamic> requestParams = {
+      'user': userName,
+      'action': action,
+      'data': data
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.deliverRequireSubmit(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //发货跟踪数据
+  static Future getDeliveryTracking(bukrs) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverTracking(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //未开票
+  static Future getNoSaleMessage(bukrs) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getNoSaleMessage(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //已开票
+  static Future getSaleMessage(bukrs) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getSaleMessage(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //未开票明细
+  static Future getNoSaleDetails(bukrs, kunnr, fhmonth) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+      'kunnr': kunnr,
+      'fhmonth': fhmonth,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getNoSaleDetails(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //已开票明细
+  static Future getSaleDetails(bukrs, ticketnum) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+      'ticketnum': ticketnum,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getSaleDetails(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //货款回笼
+  static Future getPaymentWithdrawal(bukrs, sDate, eDate) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+      's_date': sDate,
+      'e_date': eDate,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getPaymentWithdrawal(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //货款回笼明细
+  static Future getPaymentDetails(bukrs, sDate, eDate, kunnr) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+      's_date': sDate,
+      'e_date': eDate,
+      'kunnr': kunnr
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getPaymentDetails(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
 }

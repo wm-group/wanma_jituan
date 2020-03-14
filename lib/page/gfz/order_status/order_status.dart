@@ -1,10 +1,6 @@
-import 'dart:convert';
-
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/dao/data_dao.dart';
-import 'package:wanma_jituan/common/json/json_string.dart';
-import 'package:wanma_jituan/common/model/gfz/order_status_model.dart';
-import 'package:date_format/date_format.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
 class OrderStatus extends StatelessWidget {
@@ -109,7 +105,8 @@ class _OrderStatusHomeTableState extends State<OrderStatusHomeTable> {
                     return ListView(
                       children: <Widget>[
                         DataTable(
-                          columnSpacing: 24,
+                          columnSpacing: 4,
+                          horizontalMargin: 4,
                           sortColumnIndex: _sortColumnIndex,
                           sortAscending: _sortAscending,
                           columns: [

@@ -1,18 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:wanma_jituan/common/dao/data_dao.dart';
-import 'package:wanma_jituan/common/dao/user_dao.dart';
-import 'package:wanma_jituan/common/db/base_db_manager.dart';
-import 'package:wanma_jituan/common/net/code.dart';
-import 'package:wanma_jituan/common/net/http_manager.dart';
-import 'package:wanma_jituan/common/redux/wm_state.dart';
-import 'package:wanma_jituan/common/utils/navigator_utils.dart';
-import 'package:wanma_jituan/page/app.dart';
-import 'package:wanma_jituan/widget/grid_item.dart';
-import 'package:redux/redux.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:wanma_jituan/common/json/json_string.dart';
-import 'dart:convert';
+import 'package:wanma_jituan/widget/grid_item.dart';
 
 class HomePage extends StatelessWidget {
 

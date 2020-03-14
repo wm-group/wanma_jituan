@@ -20,13 +20,27 @@ class GridItemWidget extends StatelessWidget {
      onTap: () async{
         switch(functionName) {
           case 'goHomeGfz':
+            //材料板块首页
             var userName = await LocalStorage.get(Config.USER_NAME_KEY);
             var password = await LocalStorage.get(Config.PW_KEY);
             DataDao.getAuthority(userName, password);
             NavigatorUtils.goHomeGfz(context,mid);
             break;
           case 'goOrderStatus':
+            //订单状态
             NavigatorUtils.goOrderStatus(context);
+            break;
+          case 'goDeliveryTracking':
+            //发货跟踪
+            NavigatorUtils.goDeliveryTracking(context);
+            break;
+          case 'goSaleMessage':
+            //开票情况
+            NavigatorUtils.goSaleMessage(context);
+            break;
+          case 'goPaymentWithdrawal':
+            //货款回笼
+            NavigatorUtils.goPaymentWithdrawal(context);
             break;
           default:
             Scaffold.of(context).showSnackBar(SnackBar(content: Text('暂未开通')));
