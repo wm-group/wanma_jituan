@@ -2,27 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
-class OrderDetails extends StatelessWidget {
+class DeliverRequire extends StatelessWidget {
 
-  final String cusId;
-  OrderDetails({this.cusId});
+  final String vbeln;
+  DeliverRequire(this.vbeln);
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
-          title: Text('订单明细'),
           actions: <Widget>[
             FlatButton(
                 onPressed: () {
-                  //TODO 跳转到发货需求页面
-                  NavigatorUtils.goDeliverRequire(context, cusId);
+                  //TODO 跳转到发货需求编辑页面
+                  NavigatorUtils.goDeliverEdit(context, vbeln);
                 },
                 child: Text('发货需求')
             ),
+            FlatButton(
+                onPressed: () {
+                  //TODO 提交功能
+                },
+                child: Text('提交')
+            )
           ],
         ),
-        body: OrderDetailsBody(cusId)
+        body: DeliverRequireBody(vbeln)
     );
   }
 }
@@ -31,29 +37,29 @@ class CusIdContainer extends InheritedWidget {
   static CusIdContainer of(BuildContext context) =>
       context.inheritFromWidgetOfExactType(CusIdContainer) as CusIdContainer;
 
-  final String cusId;
+  final String vbeln;
   CusIdContainer({
     Key key,
-    @required this.cusId,
+    @required this.vbeln,
     @required Widget child
   }): super(key: key, child: child);
 
   @override
   bool updateShouldNotify(CusIdContainer oldWidget) {
     // TODO: implement updateShouldNotify
-    return cusId != oldWidget.cusId;
+    return vbeln != oldWidget.vbeln;
   }
 }
 
-class OrderDetailsBody extends StatefulWidget {
-  final String cusId;
-  OrderDetailsBody(this.cusId);
+class DeliverRequireBody extends StatefulWidget {
+  final String vbeln;
+  DeliverRequireBody(this.vbeln);
 
   @override
-  _OrderDetailsBodyState createState() => _OrderDetailsBodyState();
+  _DeliverRequireBodyState createState() => _DeliverRequireBodyState();
 }
 
-class _OrderDetailsBodyState extends State<OrderDetailsBody> {
+class _DeliverRequireBodyState extends State<DeliverRequireBody> {
 
   Future _futureStr;
 
@@ -61,31 +67,31 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _futureStr = _getOrderDetailsData();
+    _futureStr = _getDeliverRequireData();
+
   }
 
-  Future _getOrderDetailsData() async {
-    String bukrs = '1008';
-    var vbeln = widget.cusId;
-    var data = await DataDao.getOrderDetailsData(bukrs, vbeln);
+  Future _getDeliverRequireData() async {
+    var vbeln = widget.vbeln;
+    var data = await DataDao.getDeliverRequireData(vbeln);
     return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    return CusIdContainer(cusId: widget.cusId, child: OrderDetailsTable(_futureStr));
+    return DeliverRequireTable(_futureStr);
   }
 }
 
-class OrderDetailsTable extends StatefulWidget {
+class DeliverRequireTable extends StatefulWidget {
   final Future _futureStr;
-  OrderDetailsTable(this._futureStr);
+  DeliverRequireTable(this._futureStr);
 
   @override
-  _OrderDetailsTableState createState() => _OrderDetailsTableState();
+  _DeliverRequireTableState createState() => _DeliverRequireTableState();
 }
 
-class _OrderDetailsTableState extends State<OrderDetailsTable> {
+class _DeliverRequireTableState extends State<DeliverRequireTable> {
   List dataList;
   int _sortColumnIndex;
   bool _sortAscending = true;
@@ -94,21 +100,6 @@ class _OrderDetailsTableState extends State<OrderDetailsTable> {
   void initState() {
     // TODO: implement initState
     super.initState();
-  }
-
-  _sort(int index, bool ascending, String title) {
-    setState(() {
-      _sortColumnIndex = index;
-      _sortAscending = ascending;
-      dataList.sort((a, b) {
-        if(!ascending) {
-          final c = a;
-          a = b;
-          b = c;
-        }
-        return a[title].hashCode.compareTo(b[title].hashCode);
-      });
-    });
   }
 
   @override
@@ -134,44 +125,49 @@ class _OrderDetailsTableState extends State<OrderDetailsTable> {
                       horizontalMargin: 4,
                       sortColumnIndex: _sortColumnIndex,
                       sortAscending: _sortAscending,
+                      onSelectAll: (value) {
+                        for(var temp in dataList) {
+                          temp['selected'] = value;
+                        }
+                      },
                       columns: [
                         DataColumn(
                             label: Text('物料'),
-                            onSort: (int index, bool ascending) {
-                              _sort(index, ascending, 'wuliao');
-                            }
                         ),
                         DataColumn(
-                          label: Text('数量'),
+                          label: Text('订单量'),
                         ),
                         DataColumn(
                           label: Text('发出量'),
                         ),
                         DataColumn(
-                          label: Text('单价'),
+                          label: Text('申请量'),
+                        ),
+                        DataColumn(
+                          label: Text('申请交期'),
                         ),
                         DataColumn(
                             label: Text('状态'),
-                            onSort: (int index, bool ascending) {
-                              _sort(index, ascending, 'status');
-                            }
                         ),
                       ],
                       rows: dataList.map((data) {
                         return DataRow(
+                          selected: data['selected'],
+                          onSelectChanged: (value) {
+                            setState(() {
+                              if(data['selected'] != value) {
+                                data['selected'] = value;
+                              }
+                            });
+                          },
                             cells: [
                               DataCell(
-                                Text('${data['wuliao']}'),
-                                onTap: () {
-                                  CusIdContainer state = CusIdContainer.of(context);
-                                  var vbeln = state.cusId;
-                                  var posnr = data['posnr'];
-                                  NavigatorUtils.goOrderGoodsFollow(context, vbeln, posnr);
-                                },
+                                Text('${data['markt']}'),
                               ),
-                              DataCell(Text('${data['num']}')),
-                              DataCell(Text('${data['outnum']}')),
-                              DataCell(Text('${data['price']}')),
+                              DataCell(Text('${data['kwmeng']}')),
+                              DataCell(Text('${data['lgmng']}')),
+                              DataCell(Text('${data['qimg']}')),
+                              DataCell(Text('${data['vdatu']}')),
                               DataCell(Text('${data['status']}')),
                             ]
                         );

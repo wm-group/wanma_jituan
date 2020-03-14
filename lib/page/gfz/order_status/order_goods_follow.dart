@@ -87,7 +87,8 @@ class _OrderGoodsTableState extends State<OrderGoodsTable> {
                   return ListView(
                     children: <Widget>[
                       DataTable(
-                        columnSpacing: 8,
+                        columnSpacing: 4,
+                        horizontalMargin: 6,
                         columns: [
                           DataColumn(
                             label: Text('物流公司'),

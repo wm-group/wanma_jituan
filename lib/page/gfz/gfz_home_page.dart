@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/config/config.dart';
-import 'package:wanma_jituan/common/dao/data_dao.dart';
-import 'package:wanma_jituan/common/db/provider/user_info_db_provider.dart';
-import 'package:wanma_jituan/common/net/http_manager.dart';
 import 'package:wanma_jituan/page/Gfz/gfz_order_page.dart';
-import 'package:wanma_jituan/page/business_page.dart';
-import 'package:wanma_jituan/page/home_page.dart';
-import 'package:wanma_jituan/page/my_page.dart';
-import 'package:wanma_jituan/page/service_page.dart';
-import 'package:wanma_jituan/widget/home_drawer.dart';
+import 'package:wanma_jituan/page/gfz/business_page.dart';
+import 'package:wanma_jituan/page/gfz/service_page.dart';
 
 ///主页
 

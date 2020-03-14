@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wanma_jituan/page/Gfz/gfz_home_page.dart';
 import 'package:wanma_jituan/page/app.dart';
+import 'package:wanma_jituan/page/common/param_setting.dart';
 import 'package:wanma_jituan/page/common/question_submission.dart';
 import 'package:wanma_jituan/page/common/update_pwd.dart';
 import 'package:wanma_jituan/page/common/version_update.dart';
+<<<<<<< HEAD
 import 'package:wanma_jituan/page/gfz/order_status/order_details.dart';
 import 'package:wanma_jituan/page/gfz/order_status/order_goods_follow.dart';
 import 'package:wanma_jituan/page/gfz/order_status/order_status.dart';
@@ -18,6 +21,19 @@ import 'package:wanma_jituan/page/gfz/trade_receivable/trade_receivable.dart';//
 import 'package:wanma_jituan/page/gfz/trade_receivable/trade_details.dart';//应收货款明细
 import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_tracking.dart';//物流跟踪
 import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_detail.dart';//物流明细
+=======
+import 'package:wanma_jituan/page/gfz/delivery_tracking/delivery_tracking.dart';
+import 'package:wanma_jituan/page/gfz/order_status/deliver_edit.dart';
+import 'package:wanma_jituan/page/gfz/order_status/deliver_require.dart';
+import 'package:wanma_jituan/page/gfz/order_status/order_details.dart';
+import 'package:wanma_jituan/page/gfz/order_status/order_goods_follow.dart';
+import 'package:wanma_jituan/page/gfz/order_status/order_status.dart';
+import 'package:wanma_jituan/page/gfz/payment_withdrawal/payment_details.dart';
+import 'package:wanma_jituan/page/gfz/payment_withdrawal/payment_withdrawal.dart';
+import 'package:wanma_jituan/page/gfz/sale_message/sale_details.dart';
+import 'package:wanma_jituan/page/gfz/sale_message/sale_message.dart';
+import 'package:wanma_jituan/page/login_page.dart';
+>>>>>>> 2679c19c074a6b0d11d8743b7aa8f48917c6c14e
 
 ///导航栏
 class NavigatorUtils {
@@ -75,10 +91,73 @@ class NavigatorUtils {
   }
 
   ///发货需求明细
-  static goDeliverRequire(BuildContext context, String vbeln, String posnr) {
+  static goDeliverRequire(BuildContext context, String vbeln) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => OrderGoodsFollow(vbeln, posnr),
+        builder: (context) => DeliverRequire(vbeln),
+      ),
+    );
+  }
+
+  ///发货需求编辑界面
+  static goDeliverEdit(BuildContext context, String vbeln) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DeliverEdit(vbeln),
+      ),
+    );
+  }
+
+  ///发货跟踪
+  static goDeliveryTracking(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DeliveryTracking(),
+      ),
+    );
+  }
+
+  ///开票情况
+  static goSaleMessage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SaleMessage(),
+      ),
+    );
+  }
+
+  ///未开票明细
+  static goNoSaleDetails(BuildContext context, {kunnr, fhmonth, ticketnum}) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SaleDetails(kunnr: kunnr, fhmonth: fhmonth,),
+      ),
+    );
+  }
+
+  ///已开票明细
+  static goSaleDetails(BuildContext context, {kunnr, fhmonth, ticketnum}) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SaleDetails(ticketnum: ticketnum),
+      ),
+    );
+  }
+
+  ///货款回笼
+  static goPaymentWithdrawal(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PaymentWithdrawal(),
+      ),
+    );
+  }
+
+  ///货款回笼明细
+  static goPaymentDetails(BuildContext context, sDate, eDate, kunnr) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PaymentDetails(sDate, eDate, kunnr),
       ),
     );
   }
