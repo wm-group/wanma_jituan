@@ -60,12 +60,6 @@ class NavigatorUtils {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => OrderStatus(),
-        // builder: (context) => IssueSituation(),
-        // builder: (context) => TargetSituation(),
-        //  builder: (context) => BasePrice(),
-        // builder: (context) => TradeReceivable(),
-        // builder: (context) => LogisticsTracking(),
-
       ),
     );
   }
