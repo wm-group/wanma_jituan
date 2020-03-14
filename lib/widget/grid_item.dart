@@ -42,6 +42,26 @@ class GridItemWidget extends StatelessWidget {
             //货款回笼
             NavigatorUtils.goPaymentWithdrawal(context);
             break;
+          case 'goIssueSituation':
+            //发出情况
+            NavigatorUtils.goIssueSituation(context);
+            break;
+          case 'goTargetSituation':
+            //目标情况
+            NavigatorUtils.goTargetSituation(context);
+            break;
+          case 'goBasePrice':
+            //基准价
+            NavigatorUtils.goBasePrice(context);
+            break;
+          case 'goTradeReceivable':
+            //应收货款
+            NavigatorUtils.goTradeReceivable(context);
+            break;
+          case 'goLogisticsTracking':
+            //物流跟踪
+            NavigatorUtils.goLogisticsTracking(context);
+            break;
           default:
             Scaffold.of(context).showSnackBar(SnackBar(content: Text('暂未开通')));
             break;

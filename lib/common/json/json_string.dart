@@ -35,6 +35,31 @@ abstract class JsonString {
             "title": "货款回笼",
             "functionName": "goPaymentWithdrawal",
             "id": 4
+        },
+        {
+            "title": "发出情况",
+            "functionName": "goIssueSituation",
+            "id": 5
+        },
+        {
+            "title": "目标情况",
+            "functionName": "goTargetSituation",
+            "id": 6
+        },
+        {
+            "title": "基准价",
+            "functionName": "goBasePrice",
+            "id": 7
+        },
+        {
+            "title": "应收货款",
+            "functionName": "goTradeReceivable",
+            "id": 8
+        },
+         {
+            "title": "物流跟踪",
+            "functionName": "goLogisticsTracking",
+            "id": 9
         }
     ],
     "msg": "成功",
