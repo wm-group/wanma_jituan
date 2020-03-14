@@ -36,4 +36,34 @@ class UrlConstant {
     return '${host}wmgfzandroid/GfzSdService/jzjmessage.do';
 
   }
+  //目标情况
+  static getTargetSituation(){
+    return '${host}wmgfzandroid/GfzSdService/targetmessage.do';
+
+  }
+//发出情况
+ static getIssueSituation(){
+   return '${host}wmgfzandroid/GfzSdService/historymessage.do';
+ }
+//发出情况明细
+static getCloseDetails(){
+     return '${host}wmgfzandroid/GfzSdService/historymessagedetail.do';
+
+}
+//应收货款
+static getTradeReceivable(){
+    return '${host}wmgfzandroid/GfzSdService/yshk.do';
+}
+//应收货款明细
+static getTradeDetail(){
+    return '${host}wmgfzandroid/GfzSdService/yshkDetail.do';
+}
+//物流跟踪
+static getLogisticsTracking(){
+    return '${host}wmgfzandroid/GfzSdService/getGoodsWLData.do';
+}
+//物流明细
+static getLogisticsDetail(){
+    return '${host}wmgfzandroid/GfzSdService/signrecord/querybyorderno.do';
+}
 }
