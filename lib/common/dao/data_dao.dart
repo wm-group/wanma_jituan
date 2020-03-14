@@ -202,7 +202,10 @@ static Future getTradeReceivableData(bukrs,date1,date2) async{
   };
   var res = await HttpManager.netFetch(UrlConstant.getTradeReceivable(), requestParams, null, Options(method: 'post'));
    if(res != null && res.result) {
-
+  return res.data;
+    }else {
+      return null;
+    
   }
 }
   //未开票
