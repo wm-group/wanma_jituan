@@ -4,13 +4,20 @@ import 'package:wanma_jituan/page/app.dart';
 import 'package:wanma_jituan/page/common/question_submission.dart';
 import 'package:wanma_jituan/page/common/update_pwd.dart';
 import 'package:wanma_jituan/page/common/version_update.dart';
-import 'package:wanma_jituan/page/gfz/service/order_details.dart';
-import 'package:wanma_jituan/page/gfz/service/order_goods_follow.dart';
-import 'package:wanma_jituan/page/gfz/service/order_status.dart';
+import 'package:wanma_jituan/page/gfz/order_status/order_details.dart';
+import 'package:wanma_jituan/page/gfz/order_status/order_goods_follow.dart';
+import 'package:wanma_jituan/page/gfz/order_status/order_status.dart';
 import 'package:wanma_jituan/page/login_page.dart';
 import 'package:wanma_jituan/page/Gfz/gfz_home_page.dart';
 import 'package:wanma_jituan/page/common/param_setting.dart';
-import 'package:wanma_jituan/page/gfz/service/base_price.dart';
+import 'package:wanma_jituan/page/gfz/base_price/base_price.dart';//基准价
+import 'package:wanma_jituan/page/gfz/target_situation/target_situation.dart';//目标情况
+import 'package:wanma_jituan/page/gfz/issue_situation/issue_situation.dart';//发出情况
+import 'package:wanma_jituan/page/gfz/issue_situation/closing_details.dart';//发出明细
+import 'package:wanma_jituan/page/gfz/trade_receivable/trade_receivable.dart';//应收货款
+import 'package:wanma_jituan/page/gfz/trade_receivable/trade_details.dart';//应收货款明细
+import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_tracking.dart';//物流跟踪
+import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_detail.dart';//物流明细
 
 ///导航栏
 class NavigatorUtils {
@@ -38,7 +45,13 @@ class NavigatorUtils {
   static goOrderStatus(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => OrderStatus(),
+        // builder: (context) => OrderStatus(),
+        // builder: (context) => IssueSituation(),
+        // builder: (context) => TargetSituation(),
+        //  builder: (context) => BasePrice(),
+        // builder: (context) => TradeReceivable(),
+        builder: (context) => LogisticsTracking(),
+
       ),
     );
   }
@@ -144,4 +157,34 @@ class NavigatorUtils {
 //  static NavigatorRouter(BuildContext context,Widget widget) {
 //    return Navigator.push(context, CupertinoPageRoute(builder: (context) => widget));
 //  }
+
+
+//发出情况明细-成交明细
+    static goCloseingDetail(BuildContext context,String kunnr,String date ){
+     Navigator.of(context).push(
+           MaterialPageRoute(
+          builder: (context) => ClosingDetail(kunnr: kunnr,date: date)
+
+           ));
+    }
+
+
+//应收货款明细
+    static goTradeDetailsDetail(BuildContext context,String custormer,String kunnr ){
+     Navigator.of(context).push(
+           MaterialPageRoute(
+          builder: (context) => TradeDetails(custormer: custormer,kunnr: kunnr,)
+
+           ));
+    }
+
+
+//物流跟踪明细
+    static goLogisticsDetailsDetail(BuildContext context,String order_no){
+     Navigator.of(context).push(
+           MaterialPageRoute(
+          builder: (context) => LogisticsDetail(order_no: order_no)
+
+           ));
+    }
 }

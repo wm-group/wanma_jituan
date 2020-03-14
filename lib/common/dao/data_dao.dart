@@ -84,4 +84,108 @@ static Future getBasePriceData(bukrs) async{
     }
 
 }
+
+//目标情况数据
+static Future getTargetSituationData(bukrs,month) async{
+  Map<String,dynamic> requestParams = {
+    'bukrs':bukrs,
+    'month':month
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getTargetSituation(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+
+}
+//发出情况数据
+static Future getIssueSituationData(bukrs) async{
+  Map<String,dynamic> requestParams = {
+    'bukrs':bukrs,
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getIssueSituation(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+
+}
+//发出情况明细数据
+static Future getCloseDetailsData(bukrs,date,kunnr) async{
+   Map<String,dynamic> requestParams = {
+    'Bukrs':bukrs,
+    'date':date,
+    'kunnr':kunnr,
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getCloseDetails(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+
+}
+//应收货款数据
+static Future getTradeReceivableData(bukrs,date1,date2) async{
+   Map<String,dynamic> requestParams = {
+    'bukrs':bukrs,
+    's_date':date1,
+    'e_date':date2,
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getTradeReceivable(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+
+}
+
+//应收货款明细数据
+static Future getTradeDetailData(bukrs,kunnr) async{
+   Map<String,dynamic> requestParams = {
+    'bukrs':bukrs,
+    'kunnr':kunnr,
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getTradeDetail(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+
+}
+
+
+//物流跟踪数据
+static Future getLogisticsTrackingData(bukrs,date2,date1) async{
+   Map<String,dynamic> requestParams = {
+    'bukrs':bukrs,
+    'e_date':date2,
+    's_date':date1,
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getLogisticsTracking(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+
+}
+
+//物流跟踪明细数据
+static Future getLogisticsDetailData( order_no) async{
+   Map<String,dynamic> requestParams = {
+    'order_no':order_no,
+  };
+  var res = await HttpManager.netFetch(UrlConstant.getLogisticsDetail(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+
+}
 }
