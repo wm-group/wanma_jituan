@@ -60,7 +60,14 @@ abstract class JsonString {
             "title": "物流跟踪",
             "functionName": "goLogisticsTracking",
             "id": 9
+        },
+         {
+            "title": "市场调研",
+            "functionName": "goMarketResearch",
+            "id": 10
         }
+         
+        
     ],
     "msg": "成功",
     "code": 0
