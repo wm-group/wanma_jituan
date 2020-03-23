@@ -20,6 +20,8 @@ import 'package:wanma_jituan/page/gfz/trade_receivable/trade_receivable.dart';//
 import 'package:wanma_jituan/page/gfz/trade_receivable/trade_details.dart';//应收货款明细
 import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_tracking.dart';//物流跟踪
 import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_detail.dart';//物流明细
+import 'package:wanma_jituan/page/gfz/market_research/market_research.dart';//市场调研
+import 'package:wanma_jituan/page/gfz/market_research/market_detail.dart';//市场调研明细
 
 import 'package:wanma_jituan/page/gfz/delivery_tracking/delivery_tracking.dart';
 import 'package:wanma_jituan/page/gfz/order_status/deliver_edit.dart';
@@ -188,7 +190,26 @@ class NavigatorUtils {
       ),
     );
   }
+//市场调研
 
+static goMarketResearch(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MarketResearch(),
+      ),
+    );
+  }
+  //市场调研明细
+
+static goMarketetail(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MarketDetail(),
+      ),
+    );
+  }
+  
+  
   /*///一次发泡
   ///生产线列表
   static goFirstBubbleList(BuildContext context, String mid) {
@@ -260,7 +281,7 @@ class NavigatorUtils {
         ));
   }
 
-//  static NavigatorRouter(BuildContext context,Widget widget) {
+//  static Navigator Router(BuildContext context,Widget widget) {
 //    return Navigator.push(context, CupertinoPageRoute(builder: (context) => widget));
 //  }
 
