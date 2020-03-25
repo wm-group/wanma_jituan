@@ -106,9 +106,19 @@ class _OrderGoodsTableState extends State<OrderGoodsTable> {
                         rows: dataList.map((data) {
                           return DataRow(
                               cells: [
-                                DataCell(Text('${data['campany']}'),),
+                                DataCell(
+                                  Container(
+                                    width: MediaQuery.of(context).size.width/4,
+                                    child: Text('${data['campany']}', softWrap: true,),
+                                  ),
+                                ),
                                 DataCell(Text('${data['outdate']}')),
-                                DataCell(Text('${data['phone']}')),
+                                DataCell(
+                                  Container(
+                                    width: MediaQuery.of(context).size.width/4,
+                                    child: Text('${data['phone']}', softWrap: true,),
+                                  ),
+                                ),
                                 DataCell(Text('${data['lgmng']}')),
                               ]
                           );

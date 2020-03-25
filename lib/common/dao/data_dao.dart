@@ -113,8 +113,18 @@ static Future getBasePriceData(bukrs) async {
     }else {
       return null;
     }
+  }
 
-}
+  //历史发货需求
+  static Future getDeliverHistoryData() async{
+
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverHistory(), null, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
 
 //目标情况数据
 static Future getTargetSituationData(bukrs,month) async{

@@ -41,6 +41,11 @@ class UrlConstant {
     return '${host}wmgfzandroid/GfzSdService/saveDeliverData.do';
   }
 
+  ///历史发货需求
+  static getDeliverHistory() {
+    return '${host}wmgfzandroid/GfzSdService/hisDataQuery.do';
+  }
+
   ///高分子发货跟踪
   ///发货跟踪
   static getDeliverTracking() {

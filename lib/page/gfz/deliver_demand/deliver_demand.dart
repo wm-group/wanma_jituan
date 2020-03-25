@@ -1,59 +1,34 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
-class OrderDetails extends StatelessWidget {
-
-  final String cusId;
-  OrderDetails({this.cusId});
-
+class DeliverDemand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('订单明细'),
-          actions: <Widget>[
-            FlatButton(
-                onPressed: () {
-                  //TODO 跳转到发货需求页面
-                  NavigatorUtils.goDeliverRequire(context, cusId);
-                },
-                child: Text('发货需求')
-            ),
-          ],
-        ),
-        body: OrderDetailsBody(cusId)
+      appBar: AppBar(
+        title: Text('发货需求'),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: () {
+                NavigatorUtils.goDeliverHistory(context);
+              },
+              child: Text('历史发货需求')
+          ),
+        ],
+      ),
+      body: DeliverDemandBody(),
     );
   }
 }
 
-class CusIdContainer extends InheritedWidget {
-  static CusIdContainer of(BuildContext context) =>
-      context.inheritFromWidgetOfExactType(CusIdContainer) as CusIdContainer;
-
-  final String cusId;
-  CusIdContainer({
-    Key key,
-    @required this.cusId,
-    @required Widget child
-  }): super(key: key, child: child);
-
+class DeliverDemandBody extends StatefulWidget {
   @override
-  bool updateShouldNotify(CusIdContainer oldWidget) {
-    // TODO: implement updateShouldNotify
-    return cusId != oldWidget.cusId;
-  }
+  _DeliverDemandBodyState createState() => _DeliverDemandBodyState();
 }
 
-class OrderDetailsBody extends StatefulWidget {
-  final String cusId;
-  OrderDetailsBody(this.cusId);
-
-  @override
-  _OrderDetailsBodyState createState() => _OrderDetailsBodyState();
-}
-
-class _OrderDetailsBodyState extends State<OrderDetailsBody> {
+class _DeliverDemandBodyState extends State<DeliverDemandBody> {
 
   Future _futureStr;
 
@@ -61,31 +36,34 @@ class _OrderDetailsBodyState extends State<OrderDetailsBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _futureStr = _getOrderDetailsData();
+    _futureStr = _getOrderData();
   }
 
-  Future _getOrderDetailsData() async {
+  Future _getOrderData() async {
     String bukrs = '1008';
-    var vbeln = widget.cusId;
-    var data = await DataDao.getOrderDetailsData(bukrs, vbeln);
+    var today = DateTime.now();
+    var monthAgoDate = today.add(Duration(days: -30));
+    String s_date = formatDate(monthAgoDate, [yyyy, '-', mm, '-', dd]);
+    String e_date = formatDate(today, [yyyy, '-', mm, '-', dd]);
+    var data = await DataDao.getOrderData(bukrs, s_date, e_date);
     return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    return CusIdContainer(cusId: widget.cusId, child: OrderDetailsTable(_futureStr));
+    return OrderStatusHomeTable(_futureStr);
   }
 }
 
-class OrderDetailsTable extends StatefulWidget {
+class OrderStatusHomeTable extends StatefulWidget {
   final Future _futureStr;
-  OrderDetailsTable(this._futureStr);
+  OrderStatusHomeTable(this._futureStr);
 
   @override
-  _OrderDetailsTableState createState() => _OrderDetailsTableState();
+  _OrderStatusHomeTableState createState() => _OrderStatusHomeTableState();
 }
 
-class _OrderDetailsTableState extends State<OrderDetailsTable> {
+class _OrderStatusHomeTableState extends State<OrderStatusHomeTable> {
   List dataList;
   int _sortColumnIndex;
   bool _sortAscending = true;
@@ -96,7 +74,7 @@ class _OrderDetailsTableState extends State<OrderDetailsTable> {
     super.initState();
   }
 
-  _sort(int index, bool ascending, String title) {
+  _sort(int index, bool ascending, String title, {bool method = false}) {
     setState(() {
       _sortColumnIndex = index;
       _sortAscending = ascending;
@@ -106,7 +84,12 @@ class _OrderDetailsTableState extends State<OrderDetailsTable> {
           a = b;
           b = c;
         }
-        return a[title].hashCode.compareTo(b[title].hashCode);
+        if(method){
+          return a[title].compareTo(b[title]);
+        }else {
+          return a[title].hashCode.compareTo(b[title].hashCode);
+        }
+
       });
     });
   }
@@ -136,19 +119,22 @@ class _OrderDetailsTableState extends State<OrderDetailsTable> {
                       sortAscending: _sortAscending,
                       columns: [
                         DataColumn(
-                            label: Text('物料'),
+                            label: Text('客户'),
                             onSort: (int index, bool ascending) {
-                              _sort(index, ascending, 'wuliao');
+                              _sort(index, ascending, 'customer');
                             }
                         ),
                         DataColumn(
-                          label: Text('数量'),
+                            label: Text('下单日期'),
+                            onSort: (int index, bool ascending) {
+                              _sort(index, ascending, 'orderdate', method: true);
+                            }
                         ),
                         DataColumn(
-                          label: Text('发出量'),
-                        ),
-                        DataColumn(
-                          label: Text('单价'),
+                            label: Text('交货日期'),
+                            onSort: (int index, bool ascending) {
+                              _sort(index, ascending, 'handdate', method: true);
+                            }
                         ),
                         DataColumn(
                             label: Text('状态'),
@@ -161,20 +147,14 @@ class _OrderDetailsTableState extends State<OrderDetailsTable> {
                         return DataRow(
                             cells: [
                               DataCell(
-                                Container(
-                                  width: MediaQuery.of(context).size.width/4,
-                                  child: Text('${data['wuliao']}', softWrap: true,),
-                                ),
+                                Text('${data['customer']}'),
                                 onTap: () {
-                                  CusIdContainer state = CusIdContainer.of(context);
-                                  var vbeln = state.cusId;
-                                  var posnr = data['posnr'];
-                                  NavigatorUtils.goOrderGoodsFollow(context, vbeln, posnr);
+//                                      Scaffold.of(context).showSnackBar(SnackBar(content: Text(data['customer'])));
+                                  NavigatorUtils.goOrderDetails(context, data['vbeln']);
                                 },
                               ),
-                              DataCell(Text('${data['num']}')),
-                              DataCell(Text('${data['outnum']}')),
-                              DataCell(Text('${data['price']}')),
+                              DataCell(Text('${data['orderdate']}')),
+                              DataCell(Text('${data['handdate']}')),
                               DataCell(Text('${data['status']}')),
                             ]
                         );

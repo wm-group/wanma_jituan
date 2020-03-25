@@ -95,7 +95,7 @@ class _ClosingDetailState extends State<ClosingDetail> {
 _titleTableRow(modelList){
   return  TableRow(
       decoration: BoxDecoration(
-         color: Colors.blue,
+         color: Theme.of(context).primaryColor,
         ),
       children: [
         _sortTitleWidget( modelList, '物料描述', 'wlname'),

@@ -162,7 +162,7 @@ Widget _navWidget(){
   List<TableRow> tabelDataList = <TableRow>[
     TableRow(
       decoration: BoxDecoration(
-         color: Colors.blue,
+         color: Theme.of(context).primaryColor,
         ),
       children: [
           _selectWidget('物料名称'),

@@ -1,38 +1,32 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/dao/data_dao.dart';
+import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
-class SaleDetails extends StatelessWidget {
-
-  final String kunnr;
-  final String fhmonth;
-  final String ticketnum;
-
-  SaleDetails({this.kunnr, this.fhmonth, this.ticketnum});
+class DeliverDetails extends StatelessWidget {
+  final String cusId;
+  DeliverDetails(this.cusId);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: ticketnum == null ? Text('未开票明细') : Text('已开票明细'),
+        title: Text('发货需求明细页'),
       ),
-      body: ticketnum == null ? SaleDetailsBody(kunnr: kunnr, fhmonth: fhmonth) : SaleDetailsBody(ticketnum: ticketnum),
+      body: DeliverDetailsBody(cusId),
     );
   }
 }
 
-class SaleDetailsBody extends StatefulWidget {
-
-  final String kunnr;
-  final String fhmonth;
-  final String ticketnum;
-
-  SaleDetailsBody({this.kunnr, this.fhmonth, this.ticketnum});
+class DeliverDetailsBody extends StatefulWidget {
+  final String cusId;
+  DeliverDetailsBody(this.cusId);
 
   @override
-  _SaleDetailsBodyState createState() => _SaleDetailsBodyState();
+  _DeliverDetailsBodyState createState() => _DeliverDetailsBodyState();
 }
 
-class _SaleDetailsBodyState extends State<SaleDetailsBody> {
+class _DeliverDetailsBodyState extends State<DeliverDetailsBody> {
 
   Future _futureStr;
 
@@ -40,44 +34,30 @@ class _SaleDetailsBodyState extends State<SaleDetailsBody> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(widget.ticketnum == null) {
-      _futureStr = _getNoSaleDetails();
-    }else {
-      _futureStr = _getSaleDetails();
-    }
-
+    _futureStr = _getDeliverRequireData();
   }
 
-  Future _getNoSaleDetails() async {
-    String bukrs = '1008';
-    String kunnr = widget.kunnr;
-    String fhmonth = widget.fhmonth;
-    var data = await DataDao.getNoSaleDetails(bukrs, kunnr, fhmonth);
-    return data;
-  }
-
-  Future _getSaleDetails() async {
-    String bukrs = '1008';
-    String ticketnum = widget.ticketnum;
-    var data = await DataDao.getSaleDetails(bukrs, ticketnum);
+  Future _getDeliverRequireData() async {
+    var vbeln = widget.cusId;
+    var data = await DataDao.getDeliverRequireData(vbeln);
     return data;
   }
 
   @override
   Widget build(BuildContext context) {
-    return SaleDetailsHomeTable(_futureStr);
+    return DeliverDetailsTable(_futureStr);
   }
 }
 
-class SaleDetailsHomeTable extends StatefulWidget {
+class DeliverDetailsTable extends StatefulWidget {
   final Future _futureStr;
-  SaleDetailsHomeTable(this._futureStr);
+  DeliverDetailsTable(this._futureStr);
 
   @override
-  _SaleDetailsHomeTableState createState() => _SaleDetailsHomeTableState();
+  _DeliverDetailsTableState createState() => _DeliverDetailsTableState();
 }
 
-class _SaleDetailsHomeTableState extends State<SaleDetailsHomeTable> {
+class _DeliverDetailsTableState extends State<DeliverDetailsTable> {
   List dataList;
   int _sortColumnIndex;
   bool _sortAscending = true;
@@ -133,40 +113,33 @@ class _SaleDetailsHomeTableState extends State<SaleDetailsHomeTable> {
                       sortAscending: _sortAscending,
                       columns: [
                         DataColumn(
-                            label: Text('发货日期'),
-                            onSort: (int index, bool ascending) {
-                              _sort(index, ascending, 'date', method: true);
-                            }
+                            label: Text('物料'),
                         ),
                         DataColumn(
-                            label: Text('物料描述'),
-                            onSort: (int index, bool ascending) {
-                              _sort(index, ascending, 'describe');
-                            }
+                            label: Text('订单量'),
                         ),
                         DataColumn(
-                            label: Text('数量'),
+                            label: Text('发出量'),
                         ),
                         DataColumn(
-                            label: Text('单价'),
+                            label: Text('申请量'),
                         ),
                         DataColumn(
-                            label: Text('金额'),
+                            label: Text('申请交期'),
+                        ),
+                        DataColumn(
+                            label: Text('状态'),
                         ),
                       ],
                       rows: dataList.map((data) {
                         return DataRow(
                             cells: [
-                              DataCell(Text('${data['date']}'),),
-                              DataCell(
-                                  Container(
-                                    width: MediaQuery.of(context).size.width/4,
-                                    child: Text('${data['describe']}', softWrap: true,),
-                                  ),
-                              ),
-                              DataCell(Text('${data['num']}')),
-                              DataCell(Text('${data['perprice']}')),
-                              DataCell(Text('${data['money']}')),
+                              DataCell(Text('${data['markt']}'),),
+                              DataCell(Text('${data['kwmeng']}')),
+                              DataCell(Text('${data['lgmng']}')),
+                              DataCell(Text('${data['qimg']}')),
+                              DataCell(Text('${data['vdatu']}')),
+                              DataCell(Text('${data['status']}')),
                             ]
                         );
                       }).toList(),

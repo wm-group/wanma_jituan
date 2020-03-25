@@ -90,7 +90,7 @@ class _TradeReceivableState extends State<TradeReceivable> {
 _titleTableRow(modelList){
   return  TableRow(
       decoration: BoxDecoration(
-         color: Colors.blue,
+         color: Theme.of(context).primaryColor,
         ),
       children: [
         _sortTitleWidget(modelList, '客户↓', 'customer'),

@@ -20,7 +20,7 @@ void main() {
 //  debugPaintSizeEnabled = true; //打开视觉调试开关
   runApp(MyApp());
 
-  /*//处理未捕获异常
+  //处理未捕获异常
   FlutterError.onError = (FlutterErrorDetails details) async {
     //转发到当前zone
     Zone.current.handleUncaughtError(details.exception, details.stack);
@@ -42,7 +42,7 @@ void main() {
     print('error: $error,/n stack: $stackTrace');
     //TODO
     //推送错误信息
-  });*/
+  });
 
 }
 

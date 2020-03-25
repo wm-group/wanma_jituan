@@ -65,10 +65,10 @@ class _TradeDetailsState extends State<TradeDetails> {
   }
 }
 //标题
-_titleTableRow(){
+_titleTableRow(context){
   return TableRow(
     decoration: BoxDecoration(
-      color: Colors.blue
+      color: Theme.of(context).primaryColor
     ),
     children: [
       _titleWidget('期间'),
@@ -109,7 +109,7 @@ var today = DateTime.now();
   print(nameList);
   print('====');
   print(valueList);
-  List<TableRow> tabelDataList = <TableRow>[_titleTableRow()];
+  List<TableRow> tabelDataList = <TableRow>[_titleTableRow(context)];
  
     
   for (var i = 0; i < modelList.length; i++) {

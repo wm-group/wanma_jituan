@@ -6,6 +6,9 @@ import 'package:wanma_jituan/page/common/param_setting.dart';
 import 'package:wanma_jituan/page/common/question_submission.dart';
 import 'package:wanma_jituan/page/common/update_pwd.dart';
 import 'package:wanma_jituan/page/common/version_update.dart';
+import 'package:wanma_jituan/page/gfz/deliver_demand/deliver_demand.dart';
+import 'package:wanma_jituan/page/gfz/deliver_demand/deliver_history.dart';
+import 'package:wanma_jituan/page/gfz/order_status/deliver_details.dart';
 import 'package:wanma_jituan/page/gfz/order_status/order_details.dart';
 import 'package:wanma_jituan/page/gfz/order_status/order_goods_follow.dart';
 import 'package:wanma_jituan/page/gfz/order_status/order_status.dart';
@@ -24,6 +27,7 @@ import 'package:wanma_jituan/page/gfz/market_research/market_research.dart';//�
 import 'package:wanma_jituan/page/gfz/market_research/market_detail.dart';//市场调研明细
 
 import 'package:wanma_jituan/page/gfz/delivery_tracking/delivery_tracking.dart';
+import 'package:wanma_jituan/page/gfz/material_selection/material_selection.dart';
 import 'package:wanma_jituan/page/gfz/order_status/deliver_edit.dart';
 import 'package:wanma_jituan/page/gfz/order_status/deliver_require.dart';
 import 'package:wanma_jituan/page/gfz/order_status/order_details.dart';
@@ -137,6 +141,24 @@ class NavigatorUtils {
     );
   }
 
+  ///历史发货需求
+  static goDeliverHistory(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DeliverHistory(),
+      ),
+    );
+  }
+
+  ///发货需求最终明细
+  static goDeliverDetails(BuildContext context, String vbeln) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DeliverDetails(vbeln),
+      ),
+    );
+  }
+
   ///发货跟踪
   static goDeliveryTracking(BuildContext context) {
     Navigator.of(context).push(
@@ -190,9 +212,27 @@ class NavigatorUtils {
       ),
     );
   }
-//市场调研
 
-static goMarketResearch(BuildContext context) {
+  ///物料勾选
+  static goMaterialSelection(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MaterialSelection(),
+      ),
+    );
+  }
+
+  ///发货需求
+  static goDeliverDemand(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DeliverDemand(),
+      ),
+    );
+  }
+
+//市场调研
+  static goMarketResearch(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MarketResearch(),
@@ -201,15 +241,15 @@ static goMarketResearch(BuildContext context) {
   }
   //市场调研明细
 
-static goMarketetail(BuildContext context) {
+  static goMarketetail(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MarketDetail(),
       ),
     );
   }
-  
-  
+
+
   /*///一次发泡
   ///生产线列表
   static goFirstBubbleList(BuildContext context, String mid) {
@@ -281,7 +321,7 @@ static goMarketetail(BuildContext context) {
         ));
   }
 
-//  static Navigator Router(BuildContext context,Widget widget) {
+//  static NavigatorRouter(BuildContext context,Widget widget) {
 //    return Navigator.push(context, CupertinoPageRoute(builder: (context) => widget));
 //  }
 

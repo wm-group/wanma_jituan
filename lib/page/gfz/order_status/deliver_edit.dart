@@ -7,6 +7,8 @@ import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:wanma_jituan/common/event/submit_event.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/net/code.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
 class DeliverEdit extends StatefulWidget {
 
@@ -51,6 +53,62 @@ class _DeliverEditState extends State<DeliverEdit> {
           actions: <Widget>[
             FlatButton(
                 onPressed: () {
+                  List tempList = List();
+                  for(var temp in _data) {
+                    if(temp['selected'] == true) {
+                      Map tempMap = Map();
+                      tempMap['QIMG'] = temp['QIMG'];
+                      tempMap['VDATU'] = temp['VDATU'];
+                      tempMap['VBELN'] = temp['VBELN'];
+                      tempMap['POSNR'] = temp['POSNR'];
+                      tempList.add(tempMap);
+                    }
+                  }
+                  if(tempList != null) {
+                    _deliverEditSave('03', tempList).then((value) {
+                      if(value['status'] == 'OK') {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('提示'),
+                                content: Text('提交成功！'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      NavigatorUtils.goDeliverDetails(context, widget.vbeln);
+                                    },
+                                    child: Text('确定'),
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      }else {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('提示'),
+                                content: Text('提交失败!' + value['errordesc']),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('确定'),
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      }
+                    });
+                  }else {
+                    Fluttertoast.showToast(msg: '请先勾选再提交');
+                  }
+
                 },
                 child: Text('保存并提交')
             ),
@@ -67,29 +125,49 @@ class _DeliverEditState extends State<DeliverEdit> {
                       tempList.add(tempMap);
                     }
                   }
-                  _deliverEditSave('01', tempList).then((value) {
-                    if(value['status'] == 'OK') {
-                      showDialog(
-                          context: context,
-                        builder: (context) {
-                            return AlertDialog(
-                              title: Text('提示'),
-                              content: Text('保存成功！'),
-                              actions: <Widget>[
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('确定'),
-                                ),
-                              ],
-                            );
-                        }
-                      );
-                    }else {
-
-                    }
-                  });
+                  if(tempList != null) {
+                    _deliverEditSave('01', tempList).then((value) {
+                      if(value['status'] == 'OK') {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('提示'),
+                                content: Text('保存成功！'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('确定'),
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      }else {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('提示'),
+                                content: Text('保存失败!' + value['errordesc']),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('确定'),
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      }
+                    });
+                  }else {
+                    Fluttertoast.showToast(msg: '请先勾选再保存');
+                  }
                 },
                 child: Text('保存')
             )
@@ -233,6 +311,26 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                                   keyboardType: TextInputType.number,
                                   onChanged: (value) {
                                     //得到修改值
+                                    data['QIMG'] = value;
+                                  },
+                                  onTap: () {
+                                    if(data['selected']) {
+                                      showDialog(context: context, builder: (context) {
+                                        return AlertDialog(
+                                          title: Text('提示'),
+                                          content: Text('请取消勾选后再编辑'),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              child: Text('确认'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                    }else {
+                                    }
                                   },
                                 ),
                                 showEditIcon: true,
@@ -240,24 +338,41 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                               DataCell(
                                 Text('${data['VDATU']}'),
                                 onTap: () {
-                                  showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.parse(data['VDATU']),
-                                    firstDate: DateTime(2018),
-                                    lastDate: DateTime(2030),
-                                    builder: (BuildContext context, Widget child) {
-                                      return Theme(
-                                        data: ThemeData.dark(),
-                                        child: child,
+                                  if(data['selected']) {
+                                    showDialog(context: context, builder: (context) {
+                                      return AlertDialog(
+                                        title: Text('提示'),
+                                        content: Text('请取消勾选后再编辑'),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                            child: Text('确认'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
                                       );
-                                    },
-                                  ).then((date){
-                                    setState(() {
-                                      if(date != null){
-                                        data['VDATU'] = formatDate(date, [yyyy, '-', mm, '-', dd]);
-                                      }
                                     });
-                                  });
+                                  }else {
+                                    showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.parse(data['VDATU']),
+                                      firstDate: DateTime(2018),
+                                      lastDate: DateTime(2030),
+                                      builder: (BuildContext context, Widget child) {
+                                        return Theme(
+                                          data: ThemeData.dark(),
+                                          child: child,
+                                        );
+                                      },
+                                    ).then((date){
+                                      setState(() {
+                                        if(date != null){
+                                          data['VDATU'] = formatDate(date, [yyyy, '-', mm, '-', dd]);
+                                        }
+                                      });
+                                    });
+                                  }
                                 },
                               ),
                             ]

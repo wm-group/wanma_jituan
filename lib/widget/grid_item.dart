@@ -42,6 +42,10 @@ class GridItemWidget extends StatelessWidget {
             //货款回笼
             NavigatorUtils.goPaymentWithdrawal(context);
             break;
+          case 'goMaterialSelection':
+          //物料勾选
+            NavigatorUtils.goMaterialSelection(context);
+            break;
           case 'goIssueSituation':
             //发出情况
             NavigatorUtils.goIssueSituation(context);
@@ -61,6 +65,10 @@ class GridItemWidget extends StatelessWidget {
           case 'goLogisticsTracking':
             //物流跟踪
             NavigatorUtils.goLogisticsTracking(context);
+            break;
+          case 'goDeliverDemand':
+          //发货需求
+            NavigatorUtils.goDeliverDemand(context);
             break;
           case 'goMarketResearch':
             //市场调研

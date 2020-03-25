@@ -80,7 +80,7 @@ class _LogisticsDetailState extends State<LogisticsDetail> {
   List<TableRow> tabelDataList = <TableRow>[
     TableRow(
       decoration: BoxDecoration(
-         color: Colors.blue,
+         color: Theme.of(context).primaryColor,
         ),
       children: [
          _titleWidget('出库单号'),

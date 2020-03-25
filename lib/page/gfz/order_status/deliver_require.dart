@@ -1,34 +1,124 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:wanma_jituan/common/config/config.dart';
 import 'package:wanma_jituan/common/dao/data_dao.dart';
+import 'package:wanma_jituan/common/event/submit_event.dart';
+import 'package:wanma_jituan/common/local/local_storage.dart';
+import 'package:wanma_jituan/common/net/code.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class DeliverRequire extends StatelessWidget {
-
+class DeliverRequire extends StatefulWidget {
   final String vbeln;
   DeliverRequire(this.vbeln);
 
   @override
-  Widget build(BuildContext context) {
+  _DeliverRequireState createState() => _DeliverRequireState();
+}
 
+class _DeliverRequireState extends State<DeliverRequire> {
+  List _data;
+  StreamSubscription _subscription;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _subscription = Code.eventBus.on<SubmitEvent>().listen((event) {
+      _data = event.data;
+    });
+    super.initState();
+
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _subscription.cancel();
+  }
+
+  Future _deliverEditSave(action, dataList) async {
+    String userName = await LocalStorage.get(Config.USER_NAME_KEY);
+    var data = await DataDao.deliverEditSave(userName, action, dataList);
+    return data;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           actions: <Widget>[
             FlatButton(
                 onPressed: () {
                   //TODO 跳转到发货需求编辑页面
-                  NavigatorUtils.goDeliverEdit(context, vbeln);
+                  NavigatorUtils.goDeliverEdit(context, widget.vbeln);
                 },
                 child: Text('发货需求')
             ),
             FlatButton(
                 onPressed: () {
-                  //TODO 提交功能
+                  List tempList = List();
+                  for(var temp in _data) {
+                    if(temp['selected'] == true) {
+                      Map tempMap = Map();
+                      tempMap['QIMG'] = temp['QIMG'];
+                      tempMap['VDATU'] = temp['VDATU'];
+                      tempMap['VBELN'] = temp['VBELN'];
+                      tempMap['POSNR'] = temp['POSNR'];
+                      tempList.add(tempMap);
+                    }
+                  }
+                  if(tempList != null) {
+                    _deliverEditSave('03', tempList).then((value) {
+                      if(value['status'] == 'OK') {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('提示'),
+                                content: Text('提交成功！'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      NavigatorUtils.goDeliverDetails(context, widget.vbeln);
+                                    },
+                                    child: Text('确定'),
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      }else {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('提示'),
+                                content: Text('提交失败!' + value['errordesc']),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('确定'),
+                                  ),
+                                ],
+                              );
+                            }
+                        );
+                      }
+                    });
+                  }else {
+                    Fluttertoast.showToast(msg: '请先勾选再提交');
+                  }
                 },
                 child: Text('提交')
             )
           ],
         ),
-        body: DeliverRequireBody(vbeln)
+        body: DeliverRequireBody(widget.vbeln)
     );
   }
 }
@@ -69,6 +159,12 @@ class _DeliverRequireBodyState extends State<DeliverRequireBody> {
     super.initState();
     _futureStr = _getDeliverRequireData();
 
+  }
+
+  @override
+  void didUpdateWidget(DeliverRequireBody oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _futureStr = _getDeliverRequireData();
   }
 
   Future _getDeliverRequireData() async {
@@ -117,6 +213,9 @@ class _DeliverRequireTableState extends State<DeliverRequireTable> {
                 return Container();
               }else if(snapshot.hasData) {
                 dataList = snapshot.data;
+                for(var temp in dataList) {
+                  temp['selected'] == null ? temp['selected'] = false : temp['selected'] = temp['selected'];
+                }
 //                  dataList = JsonDecoder().convert(JsonString.tempData);
                 return ListView(
                   children: <Widget>[
@@ -129,6 +228,9 @@ class _DeliverRequireTableState extends State<DeliverRequireTable> {
                         for(var temp in dataList) {
                           temp['selected'] = value;
                         }
+                        Code.eventBus.fire(SubmitEvent(dataList));
+                        setState(() {
+                        });
                       },
                       columns: [
                         DataColumn(
@@ -152,12 +254,13 @@ class _DeliverRequireTableState extends State<DeliverRequireTable> {
                       ],
                       rows: dataList.map((data) {
                         return DataRow(
-                          selected: data['selected'],
+                          selected: data['selected'] ?? false,
                           onSelectChanged: (value) {
                             setState(() {
                               if(data['selected'] != value) {
                                 data['selected'] = value;
                               }
+                              Code.eventBus.fire(SubmitEvent(dataList));
                             });
                           },
                             cells: [
