@@ -18,7 +18,7 @@ import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
 void main() {
 //  debugPaintSizeEnabled = true; //打开视觉调试开关
-  runApp(MyApp());
+//  runApp(MyApp());
 
   //处理未捕获异常
   FlutterError.onError = (FlutterErrorDetails details) async {

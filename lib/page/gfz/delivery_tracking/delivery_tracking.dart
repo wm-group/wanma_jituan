@@ -117,7 +117,7 @@ class _DeliveryTrackingState extends State<DeliveryTracking> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(_searchIcon),
             onPressed: () {
               setState(() {
                 _isSearch = !_isSearch;
