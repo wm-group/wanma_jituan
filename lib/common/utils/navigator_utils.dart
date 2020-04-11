@@ -25,6 +25,9 @@ import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_tracking.dart
 import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_detail.dart';//物流明细
 import 'package:wanma_jituan/page/gfz/market_research/market_research.dart';//市场调研
 import 'package:wanma_jituan/page/gfz/market_research/market_detail.dart';//市场调研明细
+import 'package:wanma_jituan/page/gfz/exception_query/exception_query.dart';
+import 'package:wanma_jituan/page/gfz/exception_query/exception_query_detail.dart';
+import 'package:wanma_jituan/page/gfz/production_line/production_line.dart';
 
 import 'package:wanma_jituan/page/gfz/delivery_tracking/delivery_tracking.dart';
 import 'package:wanma_jituan/page/gfz/material_selection/material_selection.dart';
@@ -37,8 +40,9 @@ import 'package:wanma_jituan/page/gfz/payment_withdrawal/payment_details.dart';
 import 'package:wanma_jituan/page/gfz/payment_withdrawal/payment_withdrawal.dart';
 import 'package:wanma_jituan/page/gfz/sale_message/sale_details.dart';
 import 'package:wanma_jituan/page/gfz/sale_message/sale_message.dart';
-import 'package:wanma_jituan/page/login_page.dart';
 
+
+import 'package:wanma_jituan/page/login_page.dart';
 ///导航栏
 class NavigatorUtils {
 
@@ -354,4 +358,32 @@ class NavigatorUtils {
 
            ));
     }
+
+
+//工业4.0
+//异常查询
+  static goExceptionQuery(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ExceptionQuery(),
+      ),
+    );
+  }
+  //异常查询明细
+  static goExceptionQueryDetail(BuildContext context,lineNo,lineDate) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ExceptionQueryDetail(lineNo:lineNo ,lineDate: lineDate),
+      ),
+    );
+  }
+//生产线运行日志
+static goProductionLine(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ProductionLine(),
+      ),
+    );
+  }
+ 
 }

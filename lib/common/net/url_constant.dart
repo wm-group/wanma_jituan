@@ -121,6 +121,28 @@ static getLogisticsTracking(){
 static getLogisticsDetail(){
     return '${host}wmgfzandroid/GfzSdService/signrecord/querybyorderno.do';
 }
+//工业4。0
+//异常查询
+static getException(){
+    return '${host}wmgfzandroid/GfzI4Service/getLineException.do';
+}
+//异常查询明细
+static getExceptionDetail(){
+    return '${host}wmgfzandroid/GfzI4Service/getLineDetaiException.do';
+}
+//异常查询-生产线运行日志-部门
+static getExceptionProductDept(){
+    return '${host}wmgfzandroid/GfzI4Service/getDeptList.do';
+}
+//生产线运行日志进度条数据
+static getProductLine(){
+    return '${host}wmgfzandroid/GfzI4Service/getWorkShopLine.do';
+}
+//生产线运行日志表格数据
+static getProductLineTable(){
+    return '${host}wmgfzandroid/GfzI4Service/getWorkShopLineChart.do';
+}
+
 
 
   ///菜单接口

@@ -75,6 +75,16 @@ abstract class JsonString {
             "title": "物料勾选",
             "functionName": "goMaterialSelection",
             "id": 12
+        },
+        {
+            "title": "异常查询",
+            "functionName": "goExceptionQuery",
+            "id": 12
+        },
+        {
+            "title": "生产线运行日志",
+            "functionName": "goProductionLine",
+            "id": 12
         }
     ],
     "msg": "成功",
