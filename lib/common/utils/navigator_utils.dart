@@ -6,37 +6,34 @@ import 'package:wanma_jituan/page/common/param_setting.dart';
 import 'package:wanma_jituan/page/common/question_submission.dart';
 import 'package:wanma_jituan/page/common/update_pwd.dart';
 import 'package:wanma_jituan/page/common/version_update.dart';
-import 'package:wanma_jituan/page/gfz/deliver_demand/deliver_demand.dart';
-import 'package:wanma_jituan/page/gfz/deliver_demand/deliver_history.dart';
-import 'package:wanma_jituan/page/gfz/order_status/deliver_details.dart';
-import 'package:wanma_jituan/page/gfz/order_status/order_details.dart';
-import 'package:wanma_jituan/page/gfz/order_status/order_goods_follow.dart';
-import 'package:wanma_jituan/page/gfz/order_status/order_status.dart';
-import 'package:wanma_jituan/page/login_page.dart';
-import 'package:wanma_jituan/page/Gfz/gfz_home_page.dart';
-import 'package:wanma_jituan/page/common/param_setting.dart';
-import 'package:wanma_jituan/page/gfz/base_price/base_price.dart';//基准价
-import 'package:wanma_jituan/page/gfz/target_situation/target_situation.dart';//目标情况
-import 'package:wanma_jituan/page/gfz/issue_situation/issue_situation.dart';//发出情况
-import 'package:wanma_jituan/page/gfz/issue_situation/closing_details.dart';//发出明细
-import 'package:wanma_jituan/page/gfz/trade_receivable/trade_receivable.dart';//应收货款
-import 'package:wanma_jituan/page/gfz/trade_receivable/trade_details.dart';//应收货款明细
-import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_tracking.dart';//物流跟踪
-import 'package:wanma_jituan/page/gfz/logistics_tracking/logistics_detail.dart';//物流明细
-import 'package:wanma_jituan/page/gfz/market_research/market_research.dart';//市场调研
-import 'package:wanma_jituan/page/gfz/market_research/market_detail.dart';//市场调研明细
-
-import 'package:wanma_jituan/page/gfz/delivery_tracking/delivery_tracking.dart';
-import 'package:wanma_jituan/page/gfz/material_selection/material_selection.dart';
-import 'package:wanma_jituan/page/gfz/order_status/deliver_edit.dart';
-import 'package:wanma_jituan/page/gfz/order_status/deliver_require.dart';
-import 'package:wanma_jituan/page/gfz/order_status/order_details.dart';
-import 'package:wanma_jituan/page/gfz/order_status/order_goods_follow.dart';
-import 'package:wanma_jituan/page/gfz/order_status/order_status.dart';
-import 'package:wanma_jituan/page/gfz/payment_withdrawal/payment_details.dart';
-import 'package:wanma_jituan/page/gfz/payment_withdrawal/payment_withdrawal.dart';
-import 'package:wanma_jituan/page/gfz/sale_message/sale_details.dart';
-import 'package:wanma_jituan/page/gfz/sale_message/sale_message.dart';
+import 'package:wanma_jituan/page/gfz/business/base_price/base_price.dart';
+import 'package:wanma_jituan/page/gfz/business/deliver_demand/deliver_demand.dart';
+import 'package:wanma_jituan/page/gfz/business/deliver_demand/deliver_history.dart';
+import 'package:wanma_jituan/page/gfz/business/delivery_tracking/delivery_tracking.dart';
+import 'package:wanma_jituan/page/gfz/business/issue_situation/closing_details.dart';//发出明细
+import 'package:wanma_jituan/page/gfz/business/issue_situation/issue_situation.dart';//发出情况
+import 'package:wanma_jituan/page/gfz/business/logistics_tracking/logistics_detail.dart';//物流明细
+import 'package:wanma_jituan/page/gfz/business/logistics_tracking/logistics_tracking.dart';//物流跟踪
+import 'package:wanma_jituan/page/gfz/business/market_research/market_detail.dart';//市场调研明细
+import 'package:wanma_jituan/page/gfz/business/market_research/market_research.dart';//市场调研
+import 'package:wanma_jituan/page/gfz/business/material_selection/material_selection.dart';
+import 'package:wanma_jituan/page/gfz/business/order_status/deliver_details.dart';
+import 'package:wanma_jituan/page/gfz/business/order_status/deliver_edit.dart';
+import 'package:wanma_jituan/page/gfz/business/order_status/deliver_require.dart';
+import 'package:wanma_jituan/page/gfz/business/order_status/order_details.dart';
+import 'package:wanma_jituan/page/gfz/business/order_status/order_goods_follow.dart';
+import 'package:wanma_jituan/page/gfz/business/order_status/order_status.dart';
+import 'package:wanma_jituan/page/gfz/business/payment_withdrawal/payment_details.dart';
+import 'package:wanma_jituan/page/gfz/business/payment_withdrawal/payment_withdrawal.dart';
+import 'package:wanma_jituan/page/gfz/business/sale_message/sale_details.dart';
+import 'package:wanma_jituan/page/gfz/business/sale_message/sale_message.dart';
+import 'package:wanma_jituan/page/gfz/business/target_situation/target_situation.dart';//目标情况
+import 'package:wanma_jituan/page/gfz/business/trade_receivable/trade_details.dart';
+import 'package:wanma_jituan/page/gfz/business/trade_receivable/trade_receivable.dart';//应收货款
+import 'package:wanma_jituan/page/gfz/industry/line_history/line_history.dart';
+import 'package:wanma_jituan/page/gfz/industry/lines_list/line_detail.dart';
+import 'package:wanma_jituan/page/gfz/industry/lines_list/line_list.dart';
+import 'package:wanma_jituan/page/gfz/industry/lines_list/lines_list.dart';
 import 'package:wanma_jituan/page/login_page.dart';
 
 ///导航栏
@@ -78,35 +75,44 @@ class NavigatorUtils {
       ),
     );
   }
-///发出情况
-  static goIssueSituation(BuildContext context ) {
+
+  ///发出情况
+  static goIssueSituation(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => IssueSituation(),
       ),
     );
-  }///目标情况
-  static goTargetSituation(BuildContext context,) {
+  }
+
+  ///目标情况
+  static goTargetSituation(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => TargetSituation(),
       ),
     );
-  }///基准价
-  static goBasePrice(BuildContext context,  ) {
+  }
+
+  ///基准价
+  static goBasePrice(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => BasePrice(),
       ),
     );
-  }///应收货款
-  static goTradeReceivable(BuildContext context,  ) {
+  }
+
+  ///应收货款
+  static goTradeReceivable(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => TradeReceivable(),
       ),
     );
-  }///物流跟踪
+  }
+
+  ///物流跟踪
   static goLogisticsTracking(BuildContext context,  ) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -114,6 +120,7 @@ class NavigatorUtils {
       ),
     );
   }
+
   ///订单物流跟踪明细
   static goOrderGoodsFollow(BuildContext context, String vbeln, String posnr) {
     Navigator.of(context).push(
@@ -231,7 +238,7 @@ class NavigatorUtils {
     );
   }
 
-//市场调研
+  //市场调研
   static goMarketResearch(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -239,8 +246,8 @@ class NavigatorUtils {
       ),
     );
   }
-  //市场调研明细
 
+  //市场调研明细
   static goMarketetail(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -249,37 +256,42 @@ class NavigatorUtils {
     );
   }
 
-
-  /*///一次发泡
+  ///高分子工业4.0
   ///生产线列表
-  static goFirstBubbleList(BuildContext context, String mid) {
-    Navigator.push(
-      context,
+  static goLinesList(BuildContext context) {
+    Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => FirstBubbleList(mid),
+        builder: (context) => LinesList(),
       ),
     );
   }
 
-  ///养生袋清单
-  static goHealthBagList(BuildContext context) {
-    Navigator.pushNamed(context, HealthBagList.sName);
+  ///生产线列表
+  static goLineList(BuildContext context, String department) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => LineList(department: department),
+      ),
+    );
   }
 
-  ///二次发泡清单
-  static goSecondBubbleList(BuildContext context) {
-    Navigator.pushNamed(context, SecondBubbleList.sName);
+  ///生产线详细信息
+  static goLineDetail(BuildContext context, String lineNo, String lineName) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => LineDetail(lineNo: lineNo, lineName: lineName),
+      ),
+    );
   }
 
-  ///预压罐清单
-  static goPrepressureTankList(BuildContext context) {
-    Navigator.pushNamed(context, PrepressureTankList.sName);
+  ///历史运行曲线
+  static goLineHistory(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => LineHistory(),
+      ),
+    );
   }
-
-  ///打包密度清单
-  static goPackingDensityList(BuildContext context) {
-    Navigator.pushNamed(context, PackingDensityList.sName);
-  }*/
 
   ///通用
   ///修改密码

@@ -122,6 +122,22 @@ static getLogisticsDetail(){
     return '${host}wmgfzandroid/GfzSdService/signrecord/querybyorderno.do';
 }
 
+  ///高分子工业4.0
+  ///生产线列表首页
+  static getLinesList() {
+    return '${host}wmgfzandroid/GfzI4Service/getDeptWorkshopMes.do';
+  }
+
+  ///生产线列表
+  static getLineList() {
+    return '${host}wmgfzandroid/GfzI4Service/getLineList.do';
+  }
+
+  ///生产线详情页
+  static getLineDetail() {
+    return '${host}wmgfzandroid/GfzI4Service/getLineDetail.do';
+  }
+
 
   ///菜单接口
   ///修改密码
