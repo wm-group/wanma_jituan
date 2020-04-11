@@ -74,6 +74,15 @@ class GridItemWidget extends StatelessWidget {
             //市场调研
             NavigatorUtils.goMarketResearch(context);
             break;
+          case 'goExceptionQuery':
+            //4.0异常查询
+            NavigatorUtils.goExceptionQuery(context);
+            break;
+         case 'goProductionLine':
+            //4.0生产线运行日志
+            NavigatorUtils.goProductionLine(context);
+            break;
+            
           default:
             Scaffold.of(context).showSnackBar(SnackBar(content: Text('暂未开通')));
             break;
