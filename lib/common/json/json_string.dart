@@ -75,8 +75,28 @@ abstract class JsonString {
             "title": "物料勾选",
             "functionName": "goMaterialSelection",
             "id": 12
+        }
+       
+    ],
+    "msg": "成功",
+    "code": 0
+}
+  ''';
+
+  static final String gfzIndustryData ='''
+  {
+    "result": [
+        {
+            "title": "生产线列表",
+            "functionName": "goLinesList",
+            "id": 1
         },
         {
+            "title": "历史运行曲线",
+            "functionName": "goLineHistory",
+            "id": 2
+        },
+         {
             "title": "异常查询",
             "functionName": "goExceptionQuery",
             "id": 12

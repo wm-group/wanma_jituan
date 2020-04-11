@@ -382,6 +382,21 @@ static Future getLogisticsDetailData( order_no) async{
       return null;
     }
   }
+  ///高分子工业4.0
+  //生产线列表
+  static Future getLinesListData(bukrs) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getLinesList(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
   //异常查询明细
   static Future getExceptionDetail(line_no, lineDate) async{
     Map<String, dynamic> requestParams = {
@@ -389,6 +404,20 @@ static Future getLogisticsDetailData( order_no) async{
       'lineDate': lineDate,
     };
     var res = await HttpManager.netFetch(UrlConstant.getExceptionDetail(), requestParams, null, Options(method: 'post'));
+   if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+  //生产线列表
+  static Future getLineListData(department) async{
+
+    Map<String, dynamic> requestParams = {
+      'dept': department,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getLineList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       return res.data;
     }else {
@@ -416,6 +445,20 @@ static Future getLogisticsDetailData( order_no) async{
       'bukrs': bukrs,
     };
     var res = await HttpManager.netFetch(UrlConstant.getExceptionProductDept(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+  //生产线详细
+  static Future getLineDetail(lineNo) async{
+
+    Map<String, dynamic> requestParams = {
+      'line_no': lineNo,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getLineDetail(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       return res.data;
     }else {
