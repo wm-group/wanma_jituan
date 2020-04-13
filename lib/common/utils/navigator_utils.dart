@@ -9,9 +9,9 @@ import 'package:wanma_jituan/page/common/version_update.dart';
 import 'package:wanma_jituan/page/login_page.dart';
 // import 'package:wanma_jituan/page/Gfz/gfz_home_page.dart';
 // import 'package:wanma_jituan/page/common/param_setting.dart';
-import 'package:wanma_jituan/page/gfz/exception_query/exception_query.dart';
-import 'package:wanma_jituan/page/gfz/exception_query/exception_query_detail.dart';
-import 'package:wanma_jituan/page/gfz/production_line/production_line.dart';
+import 'package:wanma_jituan/page/gfz/industry/exception_query/exception_query.dart';
+import 'package:wanma_jituan/page/gfz/industry/exception_query/exception_query_detail.dart';
+import 'package:wanma_jituan/page/gfz/industry/production_line/production_line.dart';
 
 
 import 'package:wanma_jituan/page/gfz/business/base_price/base_price.dart';//基准价

@@ -4,7 +4,7 @@ import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:wanma_jituan/common/net/url_constant.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:date_format/date_format.dart';
-import 'package:wanma_jituan/page/gfz/production_line/progressbar.dart';
+import 'package:wanma_jituan/page/gfz/industry/production_line/progressbar.dart';
 
 class ProductionLine extends StatefulWidget {
   ProductionLine({Key key}) : super(key: key);
