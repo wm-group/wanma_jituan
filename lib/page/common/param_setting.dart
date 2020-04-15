@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wanma_jituan/common/local/local_storage.dart';
+import 'package:wanma_jituan/common/config/config.dart';
+
 
 class ParamSetting extends StatefulWidget {
   @override
@@ -48,7 +51,7 @@ class _ParamSettingState extends State<ParamSetting> {
       padding: EdgeInsets.only(top: 20),
       child:   TextField(
         decoration: InputDecoration(
-          icon: Icon(Icons.settings_input_svideo),
+          icon: Icon(Icons.settings),
           labelText: content,
           labelStyle: TextStyle(
               color: Colors.grey,
@@ -79,6 +82,18 @@ class _ParamSettingState extends State<ParamSetting> {
     return InkWell(
       onTap: (){
         //TODO 保存设置的sk值
+         if (_skController.text.length>0) {
+           LocalStorage.save(Config.SET_KEY, _skController.text);
+          showDialog(context: context, child: AlertDialog(
+          content: new Text( "sk值设置成功",
+         ),
+         actions: <Widget>[
+              FlatButton(
+                  child: Text('确定'),
+                  onPressed: () => Navigator.pop(context, true),
+              )
+         ], )); 
+         }
       },
       child: Container(
         padding: EdgeInsets.all(10.0),
