@@ -2,7 +2,9 @@
 class UrlConstant {
 
   static const String host = 'http://app.wanmagroup.com:8988/';
-
+  // static const String host2 = 'http://wms.wanmagroup.com/';
+    static const String host2 = 'http://itest.wanmagroup.com/';
+  
   ///登陆
   static getLogin() {
     return '${host}androidWeb/loginService/login.do';
@@ -160,11 +162,30 @@ static getProductLineTable(){
     return '${host}wmgfzandroid/GfzI4Service/getLineDetail.do';
   }
 
+//高分子报表
+
+//成品入库
+//车辆查询
+static getCar(){
+    return '${host2}car/rtWmCarService/service/8';
+  }
+  //车辆装货明细
+static getCarGoods(){
+    return '${host2}car/rtWmCarService/service/9';
+  }
+//修改车辆装货明细
+static getUpdateCarGoods(){
+    return '${host2}car/rtWmCarService/service/10';
+  }
+
+
+
+
 
   ///菜单接口
   ///修改密码
-  static updatePwd() {
+  static updatePwd(){
     return '${host}androidWeb/loginService/changePwdNew.do';
   }
-
+  
 }
