@@ -99,13 +99,28 @@ abstract class JsonString {
          {
             "title": "异常查询",
             "functionName": "goExceptionQuery",
-            "id": 12
+            "id": 3
         },
         {
             "title": "生产线运行日志",
             "functionName": "goProductionLine",
-            "id": 12
+            "id": 4
         }
+    ],
+    "msg": "成功",
+    "code": 0
+}
+  ''';
+
+  static final String gfzReportFormData ='''
+  {
+    "result": [
+        {
+            "title": "成品发货",
+            "functionName": "goGoodsRegistration",
+            "id": 1
+        }
+       
     ],
     "msg": "成功",
     "code": 0
