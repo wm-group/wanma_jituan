@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:wanma_jituan/common/config/config.dart';
+import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/model/app_menu_model.dart';
 import 'package:wanma_jituan/common/model/gfz/order_status_model.dart';
 import 'package:wanma_jituan/common/net/http_manager.dart';
@@ -465,4 +467,52 @@ static Future getLogisticsDetailData( order_no) async{
       return null;
     }
   }
+
+  //报表
+
+  //成品入库
+  //车辆查询
+  static Future getCar(_sk)async{
+    Map<String, String>requestParams={
+     '_SK_':_sk
+    };
+     var res = await HttpManager.netFetch(UrlConstant.getCar(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+//车辆装货明细
+static Future getCarGoods(inoutId,_sk)async{
+    Map<String, String>requestParams={
+     'inoutId':inoutId,
+     '_SK_':_sk
+    };
+     var res = await HttpManager.netFetch(UrlConstant.getCar(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+//修改车辆装货明细
+
+static Future getUpdateCarGoods(loadingIds,qtys,_sk)async{
+    Map<String, String>requestParams={
+      'loadingIds':loadingIds,
+      'qtys':qtys,
+      '_SK_':_sk
+    };
+     var res = await HttpManager.netFetch(UrlConstant.getCar(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+
+  
+
 }
