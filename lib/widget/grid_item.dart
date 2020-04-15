@@ -91,7 +91,12 @@ class GridItemWidget extends StatelessWidget {
           //历史运行曲线
             NavigatorUtils.goLineHistory(context);
             break;
-          default:
+             //高分子-报表
+             //成品发货
+          case 'goGoodsRegistration':
+            NavigatorUtils.goGoodsRegistration(context);
+            break;
+            default:
             Scaffold.of(context).showSnackBar(SnackBar(content: Text('暂未开通')));
             break;
         }
