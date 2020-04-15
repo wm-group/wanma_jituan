@@ -12,7 +12,7 @@ class Config {
   static const AVATAR = "avatar";
   static const BACKGROUND_MY = "my_background";
   static const PHONE_NUM = "15888812474";
-
+  static const SET_KEY = "seting_key";
   /// //////////////////////////////////////标题常量/////////////////////////////////// ///
   static const APP_TITLE = "万马集团";
 }
