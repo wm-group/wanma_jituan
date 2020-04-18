@@ -104,17 +104,14 @@ class _ProductionLineState extends State<ProductionLine> {
                     return Container();
                   }else if(snapshot.hasData) { 
             return SingleChildScrollView(
-              // child:Container(
                 child:Column(
               children: <Widget>[
             _deptTime(_deptStr, _dateStr),
             Container(
-              // color: Colors.red,
              height: _mediaHeight/2,
               child:_lineListView(_eachLineDate),
             ),
             Container(
-              // color: Colors.green,
               height: _mediaHeight/2,
               child:_tableView(_tabelTitleDate)
             )
