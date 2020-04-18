@@ -472,7 +472,8 @@ static Future getLogisticsDetailData( order_no) async{
 
   //成品入库
   //车辆查询
-  static Future getCar(_sk)async{
+  static Future getCar()async{
+    var _sk = await LocalStorage.get(Config.SET_KEY);
     Map<String, String>requestParams={
      '_SK_':_sk
     };
@@ -484,12 +485,13 @@ static Future getLogisticsDetailData( order_no) async{
     }
   }
 //车辆装货明细
-static Future getCarGoods(inoutId,_sk)async{
+static Future getCarGoods(inoutId)async{
+   var _sk = await LocalStorage.get(Config.SET_KEY);
     Map<String, String>requestParams={
      'inoutId':inoutId,
      '_SK_':_sk
     };
-     var res = await HttpManager.netFetch(UrlConstant.getCar(), requestParams, null, Options(method: 'post'));
+     var res = await HttpManager.netFetch(UrlConstant.getCarGoods(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       return res.data;
     }else {
@@ -498,13 +500,14 @@ static Future getCarGoods(inoutId,_sk)async{
   }
 //修改车辆装货明细
 
-static Future getUpdateCarGoods(loadingIds,qtys,_sk)async{
+static Future getUpdateCarGoods(loadingIds,qtys)async{
+   var _sk = await LocalStorage.get(Config.SET_KEY);
     Map<String, String>requestParams={
       'loadingIds':loadingIds,
       'qtys':qtys,
       '_SK_':_sk
     };
-     var res = await HttpManager.netFetch(UrlConstant.getCar(), requestParams, null, Options(method: 'post'));
+     var res = await HttpManager.netFetch(UrlConstant.getUpdateCarGoods(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       return res.data;
     }else {
