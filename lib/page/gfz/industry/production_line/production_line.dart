@@ -79,7 +79,7 @@ class _ProductionLineState extends State<ProductionLine> {
 
   @override
   Widget build(BuildContext context) {
-    final _mediaHeight = MediaQuery.of(context).size.height;
+    final _mediaHeight = MediaQuery.of(context).size.height-100;
     return Scaffold(
       appBar:AppBar(
         title:Text('生产线运行日志'),
@@ -103,21 +103,26 @@ class _ProductionLineState extends State<ProductionLine> {
                   if(snapshot.hasError) {
                     return Container();
                   }else if(snapshot.hasData) { 
-                 return  Container(
-             child:Column(
-          children: <Widget>[
+            return SingleChildScrollView(
+              // child:Container(
+                child:Column(
+              children: <Widget>[
             _deptTime(_deptStr, _dateStr),
             Container(
-             height: _mediaHeight/2-100,
+              // color: Colors.red,
+             height: _mediaHeight/2,
               child:_lineListView(_eachLineDate),
             ),
             Container(
+              // color: Colors.green,
               height: _mediaHeight/2,
               child:_tableView(_tabelTitleDate)
             )
           ],
         )
-      );
+              // ) ,
+            );
+           
                    }else{
           return Container();
         }
@@ -136,6 +141,7 @@ class _ProductionLineState extends State<ProductionLine> {
   //部门及日期选择
 Widget _deptTime(dept,date){
  return Container(
+   height: 20,
    color: Colors.grey[700],
    child:Text(' 车间:'+_deptStr+'   (' +_dateStr+')',style: TextStyle(color:Colors.white),)
  );
