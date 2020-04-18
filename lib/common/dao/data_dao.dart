@@ -516,8 +516,6 @@ static Future getLogisticsDetailData( order_no) async{
       return null;
     }
   }
-
-
   //报表
 
   //成品入库
