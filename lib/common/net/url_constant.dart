@@ -2,8 +2,8 @@
 class UrlConstant {
 
   static const String host = 'http://app.wanmagroup.com:8988/';
-  // static const String host2 = 'http://wms.wanmagroup.com/';
-    static const String host2 = 'http://itest.wanmagroup.com/';
+  static const String host2 = 'http://wms.wanmagroup.com/';
+    // static const String host2 = 'http://itest.wanmagroup.com/';
   
   ///登陆
   static getLogin() {
