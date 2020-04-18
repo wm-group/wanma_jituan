@@ -59,6 +59,7 @@ dev_dependencies:
   date_format: ^1.0.8
   #选择器
   flutter_picker: ^1.1.0
+  fl_chart: ^0.9.0
 
 # The following section is specific to Flutter.
 flutter:

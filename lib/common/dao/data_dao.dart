@@ -468,6 +468,56 @@ static Future getLogisticsDetailData( order_no) async{
     }
   }
 
+  //历史运行曲线
+  //车间列表
+  static Future getDeptList(bukrs) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getDeptList(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //参数列表
+  static Future getParamList(lineName) async{
+
+    Map<String, dynamic> requestParams = {
+      'line_name': lineName,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getParamList(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //历史曲线数据
+  static Future getLineHisData(department, lineName, param, lineDate) async{
+
+    Map<String, dynamic> requestParams = {
+      'dept': department,
+      'line_name': lineName,
+      'point': param,
+      'lineDate': lineDate,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getLineHisData(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+
   //报表
 
   //成品入库

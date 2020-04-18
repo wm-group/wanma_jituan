@@ -162,6 +162,24 @@ static getProductLineTable(){
     return '${host}wmgfzandroid/GfzI4Service/getLineDetail.do';
   }
 
+  ///历史运行曲线
+  ///车间信息
+  static getDeptList() {
+    return '${host}wmgfzandroid/GfzI4Service/getDeptList.do';
+  }
+
+  ///生产线信息//dept
+
+  ///参数信息
+  static getParamList() {
+    return '${host}wmgfzandroid/GfzI4Service/getCurrentData.do';
+  }
+
+  ///曲线信息
+  static getLineHisData() {
+    return '${host}wmgfzandroid/GfzI4Service/getHisData.do';
+  }
+
 //高分子报表
 
 //成品入库
