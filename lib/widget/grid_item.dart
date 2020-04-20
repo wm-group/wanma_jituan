@@ -96,7 +96,7 @@ class GridItemWidget extends StatelessWidget {
           case 'goGoodsRegistration':
             NavigatorUtils.goGoodsRegistration(context);
             break;
-          case 'goMaterialStorage':
+          // case 'goMaterialStorage':
 //            //原材料入库
 //            NavigatorUtils.goMaterialStorage(context);
             break;

@@ -19,7 +19,7 @@ class _LogisticsTrackingState extends State<LogisticsTracking> {
     List<dynamic>  _selectNameList=[];//物料名称选择数据
    bool _isSearch = false;
    IconData _searchIcon=Icons.search;
-   IconData _kehuSelectIcon =Icons.arrow_downward;
+   String  _kehuSelectIcon ='↓';
   TextEditingController controller = TextEditingController();
   String _navTitleName = '物流跟踪-本月';
   @override
@@ -73,11 +73,11 @@ class _LogisticsTrackingState extends State<LogisticsTracking> {
             _searchIcon = Icons.search;
             controller.text = '';
             _modelListData = [];
-            _kehuSelectIcon =Icons.arrow_downward;
+            _kehuSelectIcon ='↓';
 
           } else {
              _searchIcon = Icons.close;
-             _kehuSelectIcon =Icons.expand_more;
+             _kehuSelectIcon ='∨';
           }
               
             });
@@ -281,11 +281,11 @@ _listTitleStye(String textStr){
 }
 //抬头排序小部件
 Widget _sortTitleWidget(dynamic modelList,String title,String keyName){
-   IconData iconName = Icons.arrow_downward;
+   String iconName = '↓';
    if (title=='客户') {
      iconName = _kehuSelectIcon;
    }else{
-     iconName = Icons.arrow_downward;
+     iconName = '↓';
    }
   return Container(
     padding: EdgeInsets.only(top:5,bottom: 5),
@@ -293,8 +293,9 @@ Widget _sortTitleWidget(dynamic modelList,String title,String keyName){
           child:Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-             Text(title,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),textAlign: TextAlign.center,),
-             Icon(iconName,color: Colors.white,size: 17,) ],),
+             Text(title+iconName,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),textAlign: TextAlign.center,),
+            ],
+            ),
           onTap: (){
     if (title=='客户') {
               if (_isSearch) {
@@ -305,11 +306,10 @@ Widget _sortTitleWidget(dynamic modelList,String title,String keyName){
               }
             }else{
              _sort(keyName, modelList);
-            }
-          }, ),
-  );
-
+            } }, ),);
 }
+
+
 showPickerArray(BuildContext context) {
   List itemList=[];
     new Picker(
