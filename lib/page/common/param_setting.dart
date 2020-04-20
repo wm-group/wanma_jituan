@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/config/config.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class ParamSetting extends StatefulWidget {
@@ -9,7 +10,22 @@ class ParamSetting extends StatefulWidget {
 }
 
 class _ParamSettingState extends State<ParamSetting> {
+  String _param;
   final TextEditingController _skController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initParam();
+  }
+
+  initParam() async {
+    _param = await LocalStorage.get(Config.SET_KEY);
+
+    _skController.value = TextEditingValue(text: _param ?? '');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +81,10 @@ class _ParamSettingState extends State<ParamSetting> {
             borderRadius: BorderRadius.circular(20.0),
           ),
         ),
-        obscureText: true,
         controller:editingController,
+        focusNode: _focusNode,
         onChanged: (String values){
+          _param = values;
         },
 
 
@@ -81,18 +98,12 @@ class _ParamSettingState extends State<ParamSetting> {
 
     return InkWell(
       onTap: (){
-        //TODO 保存设置的sk值
+        _focusNode.unfocus();
          if (_skController.text.length>0) {
-           LocalStorage.save(Config.SET_KEY, _skController.text);
-          showDialog(context: context, child: AlertDialog(
-          content: new Text( "sk值设置成功",
-         ),
-         actions: <Widget>[
-              FlatButton(
-                  child: Text('确定'),
-                  onPressed: () => Navigator.pop(context, true),
-              )
-         ], )); 
+           LocalStorage.save(Config.SET_KEY, _param);
+           print(_param);
+          Fluttertoast.showToast(msg: 'SK值设置成功');
+          Navigator.of(context).pop();
          }
       },
       child: Container(

@@ -196,6 +196,17 @@ static getUpdateCarGoods(){
     return '${host2}car/rtWmCarService/service/10';
   }
 
+  ///原材料入库
+  ///车牌下拉列表清单
+  static getCarNoList() {
+    return '${host2}car/rtWmCarService/service/0';
+  }
+
+  ///库位下拉列表清单
+  static getWareList() {
+    return '${host2}car/rtWmCarService/service/7';
+  }
+
 
 
 

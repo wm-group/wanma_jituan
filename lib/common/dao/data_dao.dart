@@ -563,7 +563,36 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
     }
   }
 
+  //原材料入库
+  //车牌信息
+  static Future getCarNoList(_sk) async {
 
-  
+    Map<String, String>requestParams={
+      '_SK_':_sk
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getCarNoList(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //库位信息
+  static Future getWareList(_sk, plateNumber) async {
+
+    Map<String, String>requestParams={
+      '_SK_':_sk,
+      'plate_number': plateNumber
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getWareList(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
 
 }

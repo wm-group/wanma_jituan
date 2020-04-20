@@ -7,8 +7,6 @@ import 'package:wanma_jituan/page/common/question_submission.dart';
 import 'package:wanma_jituan/page/common/update_pwd.dart';
 import 'package:wanma_jituan/page/common/version_update.dart';
 import 'package:wanma_jituan/page/login_page.dart';
-// import 'package:wanma_jituan/page/Gfz/gfz_home_page.dart';
-// import 'package:wanma_jituan/page/common/param_setting.dart';
 import 'package:wanma_jituan/page/gfz/industry/exception_query/exception_query.dart';
 import 'package:wanma_jituan/page/gfz/industry/exception_query/exception_query_detail.dart';
 import 'package:wanma_jituan/page/gfz/industry/production_line/production_line.dart';
@@ -44,6 +42,7 @@ import 'package:wanma_jituan/page/gfz/industry/lines_list/line_list.dart';
 import 'package:wanma_jituan/page/gfz/industry/lines_list/lines_list.dart';
 //报表
 import 'package:wanma_jituan/page/gfz/reportform/goods_registration/goods_registration.dart';
+import 'package:wanma_jituan/page/gfz/reportform/material_storage/material_storage.dart';
 
 ///导航栏
 class NavigatorUtils {
@@ -412,5 +411,13 @@ static goProductionLine(BuildContext context) {
       ),
     );
   }
- 
+
+  //原材料入库
+  static goMaterialStorage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MaterialStorage(),
+      ),
+    );
+  }
 }

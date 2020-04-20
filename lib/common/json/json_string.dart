@@ -119,6 +119,11 @@ abstract class JsonString {
             "title": "成品发货",
             "functionName": "goGoodsRegistration",
             "id": 1
+        },
+        {
+            "title": "原材料入库",
+            "functionName": "goMaterialStorage",
+            "id": 2
         }
        
     ],
