@@ -563,6 +563,19 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
     }
   }
 
+  //成品入库列表
+  static Future getGoodsStorageList(_sk) async {
+    Map<String, String>requestParams={
+      '_SK_':_sk,
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getGoodsStorageList(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
   //原材料入库
   //车牌信息
   static Future getCarNoList(_sk) async {
@@ -594,5 +607,7 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
       return null;
     }
   }
+
+  
 
 }

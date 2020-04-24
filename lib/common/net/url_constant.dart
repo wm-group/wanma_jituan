@@ -207,7 +207,10 @@ static getUpdateCarGoods(){
     return '${host2}car/rtWmCarService/service/7';
   }
 
-
+///成品入库列表
+  static getGoodsStorageList() {
+    return '${host2}lot/rtLotInfo/lotEntry/1';
+  }
 
 
 

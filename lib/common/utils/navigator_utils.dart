@@ -42,8 +42,8 @@ import 'package:wanma_jituan/page/gfz/industry/lines_list/line_list.dart';
 import 'package:wanma_jituan/page/gfz/industry/lines_list/lines_list.dart';
 //报表
 import 'package:wanma_jituan/page/gfz/reportform/goods_registration/goods_registration.dart';
-import 'package:wanma_jituan/page/gfz/reportform/material_storage/material_storage.dart';
-
+import 'package:wanma_jituan/page/gfz/reportform/material_storage/material_storage.dart'; 
+import 'package:wanma_jituan/page/gfz/reportform/goods_storage_list/ goods_storage_list.dart';
 ///导航栏
 class NavigatorUtils {
 
@@ -417,6 +417,14 @@ static goProductionLine(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MaterialStorage(),
+      ),
+    );
+  }
+  //成品发货列表
+  static goGoodsStorageList(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => GoodsStorageList(),
       ),
     );
   }

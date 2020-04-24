@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:flutter_picker/flutter_picker.dart';
-
+import 'package:wanma_jituan/common/local/local_storage.dart';
+import 'package:wanma_jituan/common/config/config.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 class GoodsRegistration extends StatefulWidget {
   GoodsRegistration({Key key}) : super(key: key);
 
@@ -21,11 +23,17 @@ class _GoodsRegistrationState extends State<GoodsRegistration> {
   @override
   void initState() { 
     super.initState();
+      
     _getCar();
    
   }
     Future _getCar() async{
-      var data =DataDao.getCar().then((list){
+       var _sk = await LocalStorage.get(Config.SET_KEY);
+       if(_sk==null) {
+      Fluttertoast.showToast(msg: '请设置SK值');
+      Navigator.of(context).pop();
+    }else {
+     var data =DataDao.getCar().then((list){
         for (var item in list['car_list'] ){
          _carNumerList.add(item['inout_id'].toString());
          _carNameList.add(item['plate_number'].toString()); }
@@ -35,6 +43,8 @@ class _GoodsRegistrationState extends State<GoodsRegistration> {
         });
       });
       return data;
+    }
+      
     }
 
 
