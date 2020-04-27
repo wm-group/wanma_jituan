@@ -42,6 +42,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    FocusNode userNameFocusNode = FocusNode();
+    FocusNode passwordFocusNode = FocusNode();
     return StoreBuilder<WMState>(
       builder: (context,store){
         return GestureDetector(
@@ -73,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                             Image.asset('images/logo.png',width: 90,height: 90,),
                             Padding(padding: EdgeInsets.all(30.0)),
                             TextField(
+                              focusNode: userNameFocusNode,
                               decoration: InputDecoration(
                                 hintText:'请输入用户名',
                                 icon: Icon(Icons.account_circle),
@@ -84,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Padding(padding: new EdgeInsets.all(10.0)),
                             TextField(
+                              focusNode: passwordFocusNode,
                               decoration: InputDecoration(
                                 hintText:'请输入密码',
                                 icon: Icon(Icons.lock),
@@ -107,6 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               onPressed: (){
+                                userNameFocusNode.unfocus();
+                                passwordFocusNode.unfocus();
 //                                CommonUtils.showLoadingDialog(context);
 //                                Future.delayed(const Duration(seconds: 2), () {
 //                                  NavigatorUtils.goHome(context);

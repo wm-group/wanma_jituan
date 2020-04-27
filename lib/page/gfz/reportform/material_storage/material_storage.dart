@@ -4,6 +4,7 @@ import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wanma_jituan/common/style/wm_style.dart';
+import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
 class MaterialStorage extends StatelessWidget {
   @override
@@ -35,6 +36,8 @@ class _MaterialStorageBodyState extends State<MaterialStorageBody> {
   var carNoValue;
   var wareValue;
 
+  var wareName;
+
   var inoutId;
   var purpose;
 
@@ -63,7 +66,7 @@ class _MaterialStorageBodyState extends State<MaterialStorageBody> {
         carNoItems.add(item);
       }
       if(carNoList.length == 0) {
-        Fluttertoast.showToast(msg: '暂无数据');
+        Fluttertoast.showToast(msg: '暂无车牌信息');
       }else {
         carNoValue = carNoList[0]['plate_number'];
         _getWareList(carNoValue);
@@ -87,14 +90,15 @@ class _MaterialStorageBodyState extends State<MaterialStorageBody> {
       for(int i = 0;i < wareList.length;i++) {
         item = DropdownMenuItem(
           child: Text(wareList[i]['ware_name']),
-          value: wareList[i]['ware_id'],
+          value: i,
         );
         wareItems.add(item);
       }
       if(wareList.length == 0) {
-        Fluttertoast.showToast(msg: '暂无数据');
+        Fluttertoast.showToast(msg: '暂无仓库数据');
       }else {
-        wareValue = wareList[0]['ware_id'];
+        wareValue = 0;
+        wareName = wareList[0]['ware_name'];
         setState(() {
 
         });
@@ -157,6 +161,7 @@ class _MaterialStorageBodyState extends State<MaterialStorageBody> {
                       onChanged: (v) {
                         setState(() {
                           wareValue = v;
+                          wareName = wareList[v]['ware_name'];
                         });
                       },
                     ),
@@ -169,19 +174,21 @@ class _MaterialStorageBodyState extends State<MaterialStorageBody> {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
-                color: Colors.blue
+                color: Theme.of(context).primaryColor
             ),
             child: FlatButton(
               onPressed: () {
                 for(Map map in carNoList) {
-                  if(map['plate_number'] = carNoValue) {
-                    inoutId = map['inout_id'];
-                    purpose = map['purpose'];
+                  if(map['plate_number'] == carNoValue) {
+                    inoutId = map['inout_id'].toString();
+                    purpose = map['purpose'].toString();
+                    break;
                   }
                 }
+                NavigatorUtils.goStorageForm(context, wareList[wareValue]['ware_id'], wareName, _sk, inoutId, purpose);
               },
-              child: Text('确定'),
-              color: Colors.blue,
+              child: Text('确定',style: WMConstant.normalTextWhite,),
+              color: Theme.of(context).primaryColor,
             ),
           )
         ],

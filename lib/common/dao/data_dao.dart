@@ -608,6 +608,83 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
     }
   }
 
-  
+  //入库明细数据
+  static Future getWareDetail(_sk, wareId, inoutId, purpose) async {
+
+    Map<String, String>requestParams={
+      '_SK_':_sk,
+      'ware_id': wareId,
+      'inout_id': inoutId,
+      'purpose': purpose
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getWareDetail(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //拆分
+  static Future detachMaterial(_sk, carId, carLoadingId, wareId, detachNum, batch) async {
+
+    Map<String, String>requestParams={
+      '_SK_':_sk,
+      'carId': carId,
+      'carLoadingId': carLoadingId,
+      'ware_id': wareId,
+      'qty': detachNum,
+      'batch': batch
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.detachMaterial(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //异常
+  static Future reportException(_sk, inoutId, loadingId, causeId) async {
+
+    Map<String, String>requestParams={
+      '_SK_':_sk,
+      'inout_id': inoutId,
+      'loading_id': loadingId,
+      'cause_id': causeId
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.reportException(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+  //入库
+  static Future wareHouse(_sk, loadingId, actualNum, batch, wareId, packs, unit) async {
+
+    Map<String, String>requestParams={
+      '_SK_':_sk,
+      'loading_ids': loadingId,
+      'curr_qtys': actualNum,
+      'batchs': batch,
+      'ware_id': wareId,
+      'part_pack_weights': packs,
+      'zbzgg': unit
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.wareHouse(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      return res.data;
+    }else {
+      return null;
+    }
+  }
+
+
 
 }
