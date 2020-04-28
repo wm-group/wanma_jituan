@@ -1,17 +1,17 @@
-import 'package:redux/redux.dart';
-import 'package:dio/dio.dart';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:redux/redux.dart';
 import 'package:wanma_jituan/common/config/config.dart';
 import 'package:wanma_jituan/common/dao/result_dao.dart';
 import 'package:wanma_jituan/common/db/provider/user_info_db_provider.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/model/User.dart';
+import 'package:wanma_jituan/common/net/code.dart';
 import 'package:wanma_jituan/common/net/http_manager.dart';
 import 'package:wanma_jituan/common/net/url_constant.dart';
 import 'package:wanma_jituan/common/redux/user_reducer.dart';
 import 'package:wanma_jituan/common/utils/common_utils.dart';
-import 'package:wanma_jituan/common/net/code.dart';
 
 class UserDao {
   ///登录
@@ -74,7 +74,7 @@ class UserDao {
 
     Map<String, dynamic> requestParams = {
       'userId': _userId,
-      'newpwd': newPwd,
+      'newPwd': newPwd,
       'oldPwd': oldPwd,
     };
 
@@ -85,7 +85,7 @@ class UserDao {
       resultData = ResultDao(Code.errorHandleFunction(res.code, res.data['msg'], false), false);
     }
 
-    return ResultDao(resultData ?? null, res.result);
+    return resultData;
   }
 
   ///获取用户信息

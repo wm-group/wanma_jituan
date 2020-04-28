@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/dao/user_dao.dart';
 import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UpdatePwd extends StatefulWidget {
   @override
@@ -98,10 +99,8 @@ Widget _changeBtn (){
       UserDao.updatePwd(_oldPwdController.text, _newPwdController.text, _sureNewPwdController.text).then((res) {
         Navigator.pop(context);
         if(res != null && res.result){
-        Future.delayed(const Duration(seconds: 1), () {
-        NavigatorUtils.goLogin(context);
-        return true;
-        });
+          Fluttertoast.showToast(msg: '${res.data}');
+          NavigatorUtils.goLogin(context);
       }
     }
     );

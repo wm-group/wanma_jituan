@@ -10,6 +10,7 @@ import 'package:wanma_jituan/common/net/code.dart';
 import 'package:wanma_jituan/common/redux/wm_state.dart';
 import 'package:wanma_jituan/common/style/wm_style.dart';
 import 'package:wanma_jituan/common/utils/common_utils.dart';
+import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 import 'package:wanma_jituan/page/app.dart';
 import 'package:wanma_jituan/page/home_page.dart';
 import 'package:wanma_jituan/page/login_page.dart';
@@ -147,6 +148,9 @@ class _CommonLayerState extends State<CommonLayer> {
         break;
       default:
         Fluttertoast.showToast(msg: '其他异常 ' + message);
+        if(message.contains('密码过期')) {
+          NavigatorUtils.goUpdatePwd(context);
+        }
         break;
     }
   }

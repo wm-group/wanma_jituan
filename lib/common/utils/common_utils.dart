@@ -138,7 +138,6 @@ class CommonUtils {
   ///版本更新
   static checkVersion(context, bool showTip) async {
 
-
     String serverVersion = await LocalStorage.get(Config.SERVER_VERSION);
     final PackageInfo _packageInfo = await PackageInfo.fromPlatform();
     String version = _packageInfo.version;

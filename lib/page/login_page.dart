@@ -142,7 +142,10 @@ class _LoginPageState extends State<LoginPage> {
                                     if(res != null && res.result){
                                       Future.delayed(const Duration(milliseconds: 500), () async {
                                         List tempList = res.data['appList'];
-                                        var version = tempList[0]['version'];
+                                        var version;
+                                        if(tempList != null) {
+                                          version = tempList[0]['version'];
+                                        }
                                         await LocalStorage.save(Config.SERVER_VERSION, version);
                                         NavigatorUtils.goHome(context);
                                         return true;
