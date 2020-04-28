@@ -76,6 +76,7 @@ class CommonUtils {
 
   ///更新提示弹窗
   static showUpdateDialog(context, flag) {
+
     _getContent() {
       switch(flag) {
         case 1:
@@ -103,6 +104,7 @@ class CommonUtils {
     }
 
     return showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -113,7 +115,8 @@ class CommonUtils {
                 onPressed: () {
                   Navigator.pop(context);
                   if(flag == 1) {
-                    SystemNavigator.pop();
+                    // SystemNavigator.pop();
+                    exit(0);
                   }
                 },
                 child: new Text('取消'),
@@ -134,9 +137,7 @@ class CommonUtils {
 
   ///版本更新
   static checkVersion(context, bool showTip) async {
-    if(Platform.isIOS) {
-      return;
-    }
+
 
     String serverVersion = await LocalStorage.get(Config.SERVER_VERSION);
     final PackageInfo _packageInfo = await PackageInfo.fromPlatform();

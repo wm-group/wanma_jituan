@@ -65,11 +65,14 @@ return Container(
 Widget _listMenu(context, List list){
   List<Widget> _listWidget = new List();
   for (int i=0;i< list.length;i++) {
+     print('list[i],');
+     print(list[i]);
     _listWidget.add(ListTile(
       title:Text(
         list[i],
         style: TextStyle(fontSize: 18),
       ),
+      
       trailing: Icon(Icons.arrow_forward_ios,size: 18,),
       onTap: (){
         switch(list[i]) {

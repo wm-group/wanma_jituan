@@ -141,39 +141,10 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.pop(context);
                                     if(res != null && res.result){
                                       Future.delayed(const Duration(milliseconds: 500), () async {
-                                        if(Platform.isIOS) {
-                                          NavigatorUtils.goHome(context);
-                                        }else {
-                                          List tempList = res.data['appList'];
-                                          var version;
-                                          for(var map in tempList) {
-                                            switch(map['appcode']) {
-                                              case 'wmgfzandroid':
-                                                version = map['version'];
-                                                break;
-                                              case 'wmdlandroid':
-                                                version = map['version'];
-                                                break;
-                                              case 'wmgdzcandroid':
-                                                version = map['version'];
-                                                break;
-                                              case 'wmtlandroid':
-                                                version = map['version'];
-                                                break;
-                                              case 'wmtyandroid':
-                                                version = map['version'];
-                                                break;
-                                              case 'wmprandroid':
-                                                version = map['version'];
-                                                break;
-                                              default:
-                                                break;
-                                            }
-                                          }
-                                          await LocalStorage.save(Config.SERVER_VERSION, version);
-                                          NavigatorUtils.goHome(context);
-                                        }
-
+                                        List tempList = res.data['appList'];
+                                        var version = tempList[0]['version'];
+                                        await LocalStorage.save(Config.SERVER_VERSION, version);
+                                        NavigatorUtils.goHome(context);
                                         return true;
                                       });
                                     }
