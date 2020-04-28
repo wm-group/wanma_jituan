@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:wanma_jituan/common/redux/wm_state.dart';
+import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'dart:io';
 
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
@@ -76,6 +77,7 @@ Widget _listMenu(context, List list){
             //TODO
             //取后台版本号
             //跟本地版本号比较
+          CommonUtils.checkVersion(context, true);
             break;
           default:
             break;

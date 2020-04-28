@@ -15,7 +15,7 @@ import 'package:wanma_jituan/common/net/code.dart';
 
 class UserDao {
   ///登录
-  static login(userName, password, store) async {
+  static login(userName, password, appType, store) async {
 //    String type = userName + ':' +password;
 //    var bytes = utf8.encode(type);
 //    var base64Str = base64.encode(bytes);
@@ -26,7 +26,7 @@ class UserDao {
 //    await LocalStorage.save(Config.USER_BASIC_CODE, base64Str);
 
     Map<String, dynamic> requestParams = {
-      'app_type': 'ios',
+      'app_type': appType,
       'userId': userName,
       'password': password
     };
@@ -50,7 +50,7 @@ class UserDao {
         //保存用户信息
         LocalStorage.save(Config.USER_INFO, json.encode(user.toJson()));
 
-        resultData= ResultDao(user, res.result);
+        resultData = ResultDao(user, res.result);
         if (Config.DEBUG) {
           print("user result " + resultData.result.toString());
           print(resultData.data);
@@ -63,7 +63,7 @@ class UserDao {
         return ResultDao(resultData, false);
       }
     }
-    return ResultDao(resultData, res.result);
+    return ResultDao(res.data, res.result);
   }
 
   ///修改密码

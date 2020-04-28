@@ -46,6 +46,73 @@ class _DeliverEditState extends State<DeliverEdit> {
     return data;
   }
 
+  _deliverSubmit(context, String numStr, String tip) {
+    if(_data != null) {
+      List tempList = List();
+      for(var temp in _data) {
+        if(temp['selected'] == true) {
+          if(temp['STATS'] == '确认' || temp['STATS'] == '删除') {
+            Fluttertoast.showToast(msg: '状态为确认或者删除，不能$tip');
+            tempList = null;
+            break;
+          }
+          Map tempMap = Map();
+          tempMap['QIMG'] = temp['QIMG'];
+          tempMap['VDATU'] = temp['VDATU'];
+          tempMap['VBELN'] = temp['VBELN'];
+          tempMap['POSNR'] = temp['POSNR'];
+          tempList.add(tempMap);
+        }
+      }
+      if(tempList != null) {
+        _deliverEditSave(numStr, tempList).then((value) {
+          if(value['status'] == 'OK') {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('提示'),
+                    content: Text('$tip成功！'),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          if('$tip' == '提交') {
+                            NavigatorUtils.goDeliverDetails(context, widget.vbeln);
+                          }
+                        },
+                        child: Text('确定'),
+                      ),
+                    ],
+                  );
+                }
+            );
+          }else {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('提示'),
+                    content: Text('$tip失败!' + value['errordesc']),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('确定'),
+                      ),
+                    ],
+                  );
+                }
+            );
+          }
+        });
+      }
+    }else {
+      Fluttertoast.showToast(msg: '请先勾选再$tip');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,121 +120,13 @@ class _DeliverEditState extends State<DeliverEdit> {
           actions: <Widget>[
             FlatButton(
                 onPressed: () {
-                  List tempList = List();
-                  for(var temp in _data) {
-                    if(temp['selected'] == true) {
-                      Map tempMap = Map();
-                      tempMap['QIMG'] = temp['QIMG'];
-                      tempMap['VDATU'] = temp['VDATU'];
-                      tempMap['VBELN'] = temp['VBELN'];
-                      tempMap['POSNR'] = temp['POSNR'];
-                      tempList.add(tempMap);
-                    }
-                  }
-                  if(tempList != null) {
-                    _deliverEditSave('03', tempList).then((value) {
-                      if(value['status'] == 'OK') {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('提示'),
-                                content: Text('提交成功！'),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      NavigatorUtils.goDeliverDetails(context, widget.vbeln);
-                                    },
-                                    child: Text('确定'),
-                                  ),
-                                ],
-                              );
-                            }
-                        );
-                      }else {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('提示'),
-                                content: Text('提交失败!' + value['errordesc']),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('确定'),
-                                  ),
-                                ],
-                              );
-                            }
-                        );
-                      }
-                    });
-                  }else {
-                    Fluttertoast.showToast(msg: '请先勾选再提交');
-                  }
-
+                  _deliverSubmit(context, '03', '提交');
                 },
                 child: Text('保存并提交')
             ),
             FlatButton(
                 onPressed: () {
-                  List tempList = List();
-                  for(var temp in _data) {
-                    if(temp['selected'] == true) {
-                      Map tempMap = Map();
-                      tempMap['QIMG'] = temp['QIMG'];
-                      tempMap['VDATU'] = temp['VDATU'];
-                      tempMap['VBELN'] = temp['VBELN'];
-                      tempMap['POSNR'] = temp['POSNR'];
-                      tempList.add(tempMap);
-                    }
-                  }
-                  if(tempList != null) {
-                    _deliverEditSave('01', tempList).then((value) {
-                      if(value['status'] == 'OK') {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('提示'),
-                                content: Text('保存成功！'),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('确定'),
-                                  ),
-                                ],
-                              );
-                            }
-                        );
-                      }else {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('提示'),
-                                content: Text('保存失败!' + value['errordesc']),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('确定'),
-                                  ),
-                                ],
-                              );
-                            }
-                        );
-                      }
-                    });
-                  }else {
-                    Fluttertoast.showToast(msg: '请先勾选再保存');
-                  }
+                  _deliverSubmit(context, '01', '保存');
                 },
                 child: Text('保存')
             )
@@ -223,7 +182,7 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
   int _sortColumnIndex;
   bool _sortAscending = true;
 
-  final TextEditingController _textController = TextEditingController();
+  TextEditingController _textController;
 
   @override
   void initState() {
@@ -287,6 +246,7 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                         ),
                       ],
                       rows: dataList.map((data) {
+                        _textController = TextEditingController();
                         _textController.value = TextEditingValue(text: data['QIMG']);
                         return DataRow(
                             selected: data['selected'] ?? false,
@@ -312,25 +272,33 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                                   onChanged: (value) {
                                     //得到修改值
                                     data['QIMG'] = value;
-                                  },
-                                  onTap: () {
-                                    if(data['selected']) {
-                                      showDialog(context: context, builder: (context) {
-                                        return AlertDialog(
-                                          title: Text('提示'),
-                                          content: Text('请取消勾选后再编辑'),
-                                          actions: <Widget>[
-                                            FlatButton(
-                                              child: Text('确认'),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
+                                    double tempNum = double.parse('${data['KWMENG']}') - double.parse('${data['LGMNG']}');
+                                    if(double.parse('${data['QIMG']}') > tempNum) {
+                                      data['QIMG'] = '0';
+                                      setState(() {
                                       });
+                                      Fluttertoast.showToast(msg: '申请量必须小于或等于$tempNum');
                                     }else {
                                     }
+                                  },
+                                  onTap: () {
+//                                    if(data['selected']) {
+//                                      showDialog(context: context, builder: (context) {
+//                                        return AlertDialog(
+//                                          title: Text('提示'),
+//                                          content: Text('请取消勾选后再编辑'),
+//                                          actions: <Widget>[
+//                                            FlatButton(
+//                                              child: Text('确认'),
+//                                              onPressed: () {
+//                                                Navigator.of(context).pop();
+//                                              },
+//                                            ),
+//                                          ],
+//                                        );
+//                                      });
+//                                    }else {
+//                                    }
                                   },
                                 ),
                                 showEditIcon: true,
@@ -338,22 +306,22 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                               DataCell(
                                 Text('${data['VDATU']}'),
                                 onTap: () {
-                                  if(data['selected']) {
-                                    showDialog(context: context, builder: (context) {
-                                      return AlertDialog(
-                                        title: Text('提示'),
-                                        content: Text('请取消勾选后再编辑'),
-                                        actions: <Widget>[
-                                          FlatButton(
-                                            child: Text('确认'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    });
-                                  }else {
+//                                  if(data['selected']) {
+//                                    showDialog(context: context, builder: (context) {
+//                                      return AlertDialog(
+//                                        title: Text('提示'),
+//                                        content: Text('请取消勾选后再编辑'),
+//                                        actions: <Widget>[
+//                                          FlatButton(
+//                                            child: Text('确认'),
+//                                            onPressed: () {
+//                                              Navigator.of(context).pop();
+//                                            },
+//                                          ),
+//                                        ],
+//                                      );
+//                                    });
+//                                  }else {
                                     showDatePicker(
                                       context: context,
                                       initialDate: DateTime.parse(data['VDATU']),
@@ -372,7 +340,7 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                                         }
                                       });
                                     });
-                                  }
+//                                  }
                                 },
                               ),
                             ]

@@ -7,6 +7,7 @@ import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/redux/wm_state.dart';
 import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
+import 'dart:io';
 
 class LoginPage extends StatefulWidget {
 
@@ -20,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
 
   var _userName = '';
   var _password = '';
+  var appType = '';
 
   final TextEditingController userController = TextEditingController();
   final TextEditingController pwController = TextEditingController();
@@ -130,11 +132,48 @@ class _LoginPageState extends State<LoginPage> {
                                 /*Future.delayed(Duration(seconds: 1), () {
                                   NavigatorUtils.goHome(context);
                                 });*/
-                                  UserDao.login(_userName, _password, store).then((res) {
+                                if(Platform.isIOS) {
+                                  appType = 'ios';
+                                }else {
+                                  appType = 'android';
+                                }
+                                  UserDao.login(_userName, _password, appType, store).then((res) {
                                     Navigator.pop(context);
                                     if(res != null && res.result){
                                       Future.delayed(const Duration(milliseconds: 500), () async {
-                                        NavigatorUtils.goHome(context);
+                                        if(Platform.isIOS) {
+                                          NavigatorUtils.goHome(context);
+                                        }else {
+                                          List tempList = res.data['appList'];
+                                          var version;
+                                          for(var map in tempList) {
+                                            switch(map['appcode']) {
+                                              case 'wmgfzandroid':
+                                                version = map['version'];
+                                                break;
+                                              case 'wmdlandroid':
+                                                version = map['version'];
+                                                break;
+                                              case 'wmgdzcandroid':
+                                                version = map['version'];
+                                                break;
+                                              case 'wmtlandroid':
+                                                version = map['version'];
+                                                break;
+                                              case 'wmtyandroid':
+                                                version = map['version'];
+                                                break;
+                                              case 'wmprandroid':
+                                                version = map['version'];
+                                                break;
+                                              default:
+                                                break;
+                                            }
+                                          }
+                                          await LocalStorage.save(Config.SERVER_VERSION, version);
+                                          NavigatorUtils.goHome(context);
+                                        }
+
                                         return true;
                                       });
                                     }

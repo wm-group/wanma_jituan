@@ -1,9 +1,10 @@
 ///接口地址
 class UrlConstant {
 
-  static const String host = 'http://app.wanmagroup.com:8988/';
-//  static const String host2 = 'http://wms.wanmagroup.com/';
-     static const String host2 = 'http://itest.wanmagroup.com/';//测试
+  static const String host = 'http://app.wanmagroup.com:8988/';//正式
+//  static const String host2 = 'http://wms.wanmagroup.com/';//正式
+//  static const String host = 'https://appdownload.wanmagroup.com:8443/';//测试
+  static const String host2 = 'http://itest.wanmagroup.com/';//测试
   
   ///登陆
   static getLogin() {
