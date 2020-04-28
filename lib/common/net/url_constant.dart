@@ -212,7 +212,10 @@ static getUpdateCarGoods(){
     return '${host2}lot/rtLotInfo/lotEntry/1';
   }
 
-
+///原材料入库列表
+  static getMaterialStorageList() {
+    return '${host2}lot/rtLotInfo/lotEntry/0';
+  }
 
   ///菜单接口
   ///修改密码

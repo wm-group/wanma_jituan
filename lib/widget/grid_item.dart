@@ -104,6 +104,10 @@ class GridItemWidget extends StatelessWidget {
           case 'goGoodsStorageList':
             NavigatorUtils.goGoodsStorageList(context);
             break;
+            // 原材料入库列表
+          case 'goMaterialStorageList':
+            NavigatorUtils.goMaterialStorageList(context);
+            break;
             default:
             Scaffold.of(context).showSnackBar(SnackBar(content: Text('暂未开通')));
             break;
