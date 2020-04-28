@@ -59,7 +59,10 @@ dev_dependencies:
   date_format: ^1.0.8
   #选择器
   flutter_picker: ^1.1.0
+  #图表
   fl_chart: ^0.9.0
+  #包信息
+  package_info: ^0.4.0+17
 
 # The following section is specific to Flutter.
 flutter:

@@ -253,14 +253,14 @@ class _LineHistoryBodyState extends State<LineHistoryBody> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: Colors.blue
+                  color: Theme.of(context).primaryColor
                 ),
                 child: FlatButton(
                   onPressed: () {
                     _showLine();
                   },
-                  child: Text('确定'),
-                  color: Colors.blue,
+                  child: Text('确定', style: WMConstant.normalTextWhite,),
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ],

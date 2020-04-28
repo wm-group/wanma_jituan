@@ -6,6 +6,7 @@ import 'package:wanma_jituan/page/common/param_setting.dart';
 import 'package:wanma_jituan/page/common/question_submission.dart';
 import 'package:wanma_jituan/page/common/update_pwd.dart';
 import 'package:wanma_jituan/page/common/version_update.dart';
+import 'package:wanma_jituan/page/gfz/reportform/material_storage/storage_form.dart';
 import 'package:wanma_jituan/page/login_page.dart';
 import 'package:wanma_jituan/page/gfz/industry/exception_query/exception_query.dart';
 import 'package:wanma_jituan/page/gfz/industry/exception_query/exception_query_detail.dart';
@@ -418,6 +419,14 @@ static goProductionLine(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MaterialStorage(),
+      ),
+    );
+  }
+
+  static goStorageForm(BuildContext context, wareId, wareName, sk, inoutId, purpose) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => StorageForm(wareId, wareName, sk, inoutId, purpose),
       ),
     );
   }

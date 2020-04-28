@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/config/config.dart';
+import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/page/home_page.dart';
 import 'package:wanma_jituan/widget/home_drawer.dart';
+import 'dart:io';
 
 ///主页
 
@@ -40,6 +42,9 @@ class _AppState extends State<App> with SingleTickerProviderStateMixin{
     super.initState();
 //    UserInfoDbProvider provider = UserInfoDbProvider();
 //    provider.queryUser('2005');
+    //检查版本更新
+    CommonUtils.checkVersion(context, false);
+
   }
 
   @override

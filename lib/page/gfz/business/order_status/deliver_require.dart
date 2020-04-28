@@ -44,6 +44,71 @@ class _DeliverRequireState extends State<DeliverRequire> {
     return data;
   }
 
+  _deliverSubmit(context) {
+    if(_data != null) {
+      List tempList = List();
+      for(var temp in _data) {
+        if(temp['selected'] == true) {
+          if(temp['STATS'] == '确认' || temp['STATS'] == '删除') {
+            Fluttertoast.showToast(msg: '状态为确认或者删除，不能提交');
+            tempList = null;
+            break;
+          }
+          Map tempMap = Map();
+          tempMap['QIMG'] = temp['QIMG'];
+          tempMap['VDATU'] = temp['VDATU'];
+          tempMap['VBELN'] = temp['VBELN'];
+          tempMap['POSNR'] = temp['POSNR'];
+          tempList.add(tempMap);
+        }
+      }
+      if(tempList != null) {
+        _deliverEditSave('03', tempList).then((value) {
+          if(value['status'] == 'OK') {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('提示'),
+                    content: Text('提交成功！'),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          NavigatorUtils.goDeliverDetails(context, widget.vbeln);
+                        },
+                        child: Text('确定'),
+                      ),
+                    ],
+                  );
+                }
+            );
+          }else {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('提示'),
+                    content: Text('提交失败!' + value['errordesc']),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('确定'),
+                      ),
+                    ],
+                  );
+                }
+            );
+          }
+        });
+      }
+    }else {
+      Fluttertoast.showToast(msg: '请先勾选再提交');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,61 +123,7 @@ class _DeliverRequireState extends State<DeliverRequire> {
             ),
             FlatButton(
                 onPressed: () {
-                  List tempList = List();
-                  for(var temp in _data) {
-                    if(temp['selected'] == true) {
-                      Map tempMap = Map();
-                      tempMap['QIMG'] = temp['QIMG'];
-                      tempMap['VDATU'] = temp['VDATU'];
-                      tempMap['VBELN'] = temp['VBELN'];
-                      tempMap['POSNR'] = temp['POSNR'];
-                      tempList.add(tempMap);
-                    }
-                  }
-                  if(tempList != null) {
-                    _deliverEditSave('03', tempList).then((value) {
-                      if(value['status'] == 'OK') {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('提示'),
-                                content: Text('提交成功！'),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      NavigatorUtils.goDeliverDetails(context, widget.vbeln);
-                                    },
-                                    child: Text('确定'),
-                                  ),
-                                ],
-                              );
-                            }
-                        );
-                      }else {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('提示'),
-                                content: Text('提交失败!' + value['errordesc']),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('确定'),
-                                  ),
-                                ],
-                              );
-                            }
-                        );
-                      }
-                    });
-                  }else {
-                    Fluttertoast.showToast(msg: '请先勾选再提交');
-                  }
+                  _deliverSubmit(context);
                 },
                 child: Text('提交')
             )
