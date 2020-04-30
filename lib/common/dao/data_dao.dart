@@ -35,10 +35,11 @@ class DataDao {
 //      }
 //    }
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //订单明细数据
@@ -51,10 +52,11 @@ class DataDao {
 
     var res = await HttpManager.netFetch(UrlConstant.getOrderDetailsData(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //订单物流跟踪数据
@@ -68,25 +70,28 @@ class DataDao {
 
     var res = await HttpManager.netFetch(UrlConstant.getOrderGoodsFollow(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
-  }
-
-//基准价数据
-static Future getBasePriceData(bukrs) async {
-  Map<String, dynamic> requestParams = {
-    'bukrs': bukrs
-  };
-  var res = await HttpManager.netFetch(
-      UrlConstant.getBasePrice(), requestParams, null, Options(method: 'post'));
-  if (res != null && res.result) {
-    return res.data;
-  } else {
     return null;
   }
-}
+
+  //基准价数据
+  static Future getBasePriceData(bukrs) async {
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs
+    };
+    var res = await HttpManager.netFetch(
+        UrlConstant.getBasePrice(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
+  }
+
   //发货需求明细
   static Future getDeliverRequireData(vbeln) async{
 
@@ -96,10 +101,11 @@ static Future getBasePriceData(bukrs) async {
 
     var res = await HttpManager.netFetch(UrlConstant.getDeliverRequire(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //发货需求编辑页
@@ -111,10 +117,11 @@ static Future getBasePriceData(bukrs) async {
 
     var res = await HttpManager.netFetch(UrlConstant.getDeliverEdit(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //历史发货需求
@@ -122,38 +129,41 @@ static Future getBasePriceData(bukrs) async {
 
     var res = await HttpManager.netFetch(UrlConstant.getDeliverHistory(), null, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
-//目标情况数据
-static Future getTargetSituationData(bukrs,month) async{
-  Map<String,dynamic> requestParams = {
-    'bukrs':bukrs,
-    'month':month
-  };
-  var res = await HttpManager.netFetch(UrlConstant.getTargetSituation(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+  //目标情况数据
+  static Future getTargetSituationData(bukrs,month) async{
+    Map<String,dynamic> requestParams = {
+      'bukrs':bukrs,
+      'month':month
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getTargetSituation(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
+  }
 
-}
-//发出情况数据
-static Future getIssueSituationData(bukrs) async{
-  Map<String,dynamic> requestParams = {
-    'bukrs':bukrs,
-  };
-  var res = await HttpManager.netFetch(UrlConstant.getIssueSituation(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
-    
-  }}
+  //发出情况数据
+  static Future getIssueSituationData(bukrs) async{
+    Map<String,dynamic> requestParams = {
+      'bukrs':bukrs,
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getIssueSituation(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
+  }
 
   //发货需求编辑页保存功能
   static Future deliverEditSave(userName, action, data) async{
@@ -166,28 +176,28 @@ static Future getIssueSituationData(bukrs) async{
 
     var res = await HttpManager.netFetch(UrlConstant.deliverRequireSubmit(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
 
+  }
 
-}
-//发出情况明细数据
-static Future getCloseDetailsData(bukrs,date,kunnr) async{
-   Map<String,dynamic> requestParams = {
-    'Bukrs':bukrs,
-    'date':date,
-    'kunnr':kunnr,
-  };
-  var res = await HttpManager.netFetch(UrlConstant.getCloseDetails(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-     return res.data;
-    }else {
-      return null;
-    
-   }
+  //发出情况明细数据
+  static Future getCloseDetailsData(bukrs,date,kunnr) async{
+    Map<String,dynamic> requestParams = {
+      'Bukrs':bukrs,
+      'date':date,
+      'kunnr':kunnr,
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getCloseDetails(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
   }
 
   //发货跟踪数据
@@ -199,27 +209,30 @@ static Future getCloseDetailsData(bukrs,date,kunnr) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getDeliverTracking(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
 
-}
-//应收货款数据
-static Future getTradeReceivableData(bukrs,date1,date2) async{
-   Map<String,dynamic> requestParams = {
-    'bukrs':bukrs,
-    's_date':date1,
-    'e_date':date2,
-  };
-  var res = await HttpManager.netFetch(UrlConstant.getTradeReceivable(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-  return res.data;
-    }else {
-      return null;
-    
   }
-}
+
+  //应收货款数据
+  static Future getTradeReceivableData(bukrs,date1,date2) async{
+    Map<String,dynamic> requestParams = {
+      'bukrs':bukrs,
+      's_date':date1,
+      'e_date':date2,
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getTradeReceivable(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
+  }
+
   //未开票
   static Future getNoSaleMessage(bukrs) async{
 
@@ -229,26 +242,26 @@ static Future getTradeReceivableData(bukrs,date1,date2) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getNoSaleMessage(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
+  }
 
-
-}
-
-//应收货款明细数据
-static Future getTradeDetailData(bukrs,kunnr) async{
-   Map<String,dynamic> requestParams = {
-    'bukrs':bukrs,
-    'kunnr':kunnr,
-  };
-  var res = await HttpManager.netFetch(UrlConstant.getTradeDetail(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-   return res.data;
-    }else {
-      return null;
+  //应收货款明细数据
+  static Future getTradeDetailData(bukrs,kunnr) async{
+    Map<String,dynamic> requestParams = {
+      'bukrs':bukrs,
+      'kunnr':kunnr,
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getTradeDetail(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //已开票
@@ -260,28 +273,27 @@ static Future getTradeDetailData(bukrs,kunnr) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getSaleMessage(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
+  }
 
-
-}
-
-
-//物流跟踪数据
-static Future getLogisticsTrackingData(bukrs,date2,date1) async{
-   Map<String,dynamic> requestParams = {
-    'bukrs':bukrs,
-    'e_date':date2,
-    's_date':date1,
-  };
-  var res = await HttpManager.netFetch(UrlConstant.getLogisticsTracking(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-     return res.data;
-    }else {
-      return null;
+  //物流跟踪数据
+  static Future getLogisticsTrackingData(bukrs,date2,date1) async{
+    Map<String,dynamic> requestParams = {
+      'bukrs':bukrs,
+      'e_date':date2,
+      's_date':date1,
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getLogisticsTracking(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //未开票明细
@@ -295,25 +307,27 @@ static Future getLogisticsTrackingData(bukrs,date2,date1) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getNoSaleDetails(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
 
 
-}
+  }
 
-//物流跟踪明细数据
-static Future getLogisticsDetailData( order_no) async{
-   Map<String,dynamic> requestParams = {
-    'order_no':order_no,
-  };
-  var res = await HttpManager.netFetch(UrlConstant.getLogisticsDetail(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-     return res.data;
-    }else {
-      return null;
+  //物流跟踪明细数据
+  static Future getLogisticsDetailData( order_no) async{
+    Map<String,dynamic> requestParams = {
+      'order_no':order_no,
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getLogisticsDetail(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //已开票明细
@@ -326,15 +340,14 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getSaleDetails(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
 
 
-}
-
-  
+  }
 
   //货款回笼
   static Future getPaymentWithdrawal(bukrs, sDate, eDate) async{
@@ -347,10 +360,11 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getPaymentWithdrawal(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //货款回笼明细
@@ -365,11 +379,13 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getPaymentDetails(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
+
   //工业4.0
   //异常查询-生产线运行日志
   static Future getException(dept, lineDate,url) async{
@@ -379,11 +395,13 @@ static Future getLogisticsDetailData( order_no) async{
     };
     var res = await HttpManager.netFetch(url, requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
+
   ///高分子工业4.0
   //生产线列表
   static Future getLinesListData(bukrs) async{
@@ -394,11 +412,13 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getLinesList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
+
   //异常查询明细
   static Future getExceptionDetail(line_no, lineDate) async{
     Map<String, dynamic> requestParams = {
@@ -406,12 +426,14 @@ static Future getLogisticsDetailData( order_no) async{
       'lineDate': lineDate,
     };
     var res = await HttpManager.netFetch(UrlConstant.getExceptionDetail(), requestParams, null, Options(method: 'post'));
-   if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
+
   //生产线列表
   static Future getLineListData(department) async{
 
@@ -421,12 +443,13 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getLineList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
-  
+
   // //生产线运行日志
   // static Future getProductionLine(dept, lineDate,url) async{
   //   Map<String, dynamic> requestParams = {
@@ -440,19 +463,22 @@ static Future getLogisticsDetailData( order_no) async{
   //     return null;
   //   }
   // }
-  
-//异常查询_生产线运行日志_部门列表
+
+
+  //异常查询_生产线运行日志_部门列表
   static Future getExceptionProductDept(bukrs) async{
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
     };
     var res = await HttpManager.netFetch(UrlConstant.getExceptionProductDept(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
+
   //生产线详细
   static Future getLineDetail(lineNo) async{
 
@@ -462,10 +488,11 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getLineDetail(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //历史运行曲线
@@ -478,10 +505,11 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getDeptList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //参数列表
@@ -493,10 +521,11 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getParamList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //历史曲线数据
@@ -511,10 +540,11 @@ static Future getLogisticsDetailData( order_no) async{
 
     var res = await HttpManager.netFetch(UrlConstant.getLineHisData(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
   //报表
 
@@ -523,44 +553,48 @@ static Future getLogisticsDetailData( order_no) async{
   static Future getCar()async{
     var _sk = await LocalStorage.get(Config.SET_KEY);
     Map<String, String>requestParams={
-     '_SK_':_sk
+      '_SK_':_sk
     };
-     var res = await HttpManager.netFetch(UrlConstant.getCar(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getCar(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
-//车辆装货明细
-static Future getCarGoods(inoutId)async{
-   var _sk = await LocalStorage.get(Config.SET_KEY);
-    Map<String, String>requestParams={
-     'inoutId':inoutId,
-     '_SK_':_sk
-    };
-     var res = await HttpManager.netFetch(UrlConstant.getCarGoods(), requestParams, null, Options(method: 'post'));
-    if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
-    }
-  }
-//修改车辆装货明细
 
-static Future getUpdateCarGoods(loadingIds,qtys)async{
-   var _sk = await LocalStorage.get(Config.SET_KEY);
+  //车辆装货明细
+  static Future getCarGoods(inoutId)async{
+    var _sk = await LocalStorage.get(Config.SET_KEY);
+    Map<String, String>requestParams={
+      'inoutId':inoutId,
+      '_SK_':_sk
+    };
+    var res = await HttpManager.netFetch(UrlConstant.getCarGoods(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
+  }
+
+  //修改车辆装货明细
+  static Future getUpdateCarGoods(loadingIds,qtys)async{
+    var _sk = await LocalStorage.get(Config.SET_KEY);
     Map<String, String>requestParams={
       'loadingIds':loadingIds,
       'qtys':qtys,
       '_SK_':_sk
     };
-     var res = await HttpManager.netFetch(UrlConstant.getUpdateCarGoods(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getUpdateCarGoods(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //成品入库列表
@@ -570,10 +604,11 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
     };
     var res = await HttpManager.netFetch(UrlConstant.getGoodsStorageList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //原材料入库
@@ -586,10 +621,11 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
 
     var res = await HttpManager.netFetch(UrlConstant.getCarNoList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //库位信息
@@ -602,10 +638,11 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
 
     var res = await HttpManager.netFetch(UrlConstant.getWareList(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //入库明细数据
@@ -620,10 +657,11 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
 
     var res = await HttpManager.netFetch(UrlConstant.getWareDetail(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //拆分
@@ -640,10 +678,11 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
 
     var res = await HttpManager.netFetch(UrlConstant.detachMaterial(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //异常
@@ -658,10 +697,11 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
 
     var res = await HttpManager.netFetch(UrlConstant.reportException(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
 
   //入库
@@ -679,12 +719,11 @@ static Future getUpdateCarGoods(loadingIds,qtys)async{
 
     var res = await HttpManager.netFetch(UrlConstant.wareHouse(), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
-      return res.data;
-    }else {
-      return null;
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
     }
+    return null;
   }
-
-
 
 }

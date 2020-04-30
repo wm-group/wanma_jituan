@@ -114,45 +114,45 @@ Widget _navWidget(){
           })
         ],
       ),
-      
-      body: FutureBuilder(
-        future: _modelListFuture,
-        builder:  (context, snapshot) {
-          switch(snapshot.connectionState) {
+
+        body: FutureBuilder(
+            future: _modelListFuture,
+            builder:  (context, snapshot) {
+              switch(snapshot.connectionState) {
                 case ConnectionState.waiting:
                   return Center(child: CircularProgressIndicator(semanticsLabel: '加载中...',),);
                 case ConnectionState.done:
                   if(snapshot.hasError) {
                     return Container();
-                  }else if(snapshot.hasData) { 
+                  }else if(snapshot.hasData) {
                     _tempList = snapshot.data;
                     if (_modelListData.isEmpty) {
-                    _modelListData= snapshot.data;
+                      _modelListData= snapshot.data;
                     }
-        return ListView(
-          children: <Widget>[
-            Table(
-                border: TableBorder.all(
-                color: Colors.grey,
-                width: 1.0,
-                style: BorderStyle.solid,
-              ),
-              children: _tableList(context,),
-            )
-          ],
-        );
-      }else{
-          return Container();
-        }
-        break;
+                    return ListView(
+                      children: <Widget>[
+                        Table(
+                          border: TableBorder.all(
+                            color: Colors.grey,
+                            width: 1.0,
+                            style: BorderStyle.solid,
+                          ),
+                          children: _tableList(context,),
+                        )
+                      ],
+                    );
+                  }else{
+                    return Container();
+                  }
+                  break;
                 default:
                   return null;
                   break;
               }
-      }
-      
-      
-      )
+            }
+
+
+        )
     );  
   }
 

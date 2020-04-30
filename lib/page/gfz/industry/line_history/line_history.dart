@@ -48,7 +48,7 @@ class _LineHistoryBodyState extends State<LineHistoryBody> {
     var bukrs = '1008';
     deptList = await DataDao.getDeptList(bukrs);
     DropdownMenuItem item;
-    for(int i = 0;i < deptList.length;i++) {
+    for(int i = 0;i < deptList?.length;i++) {
       item = DropdownMenuItem(
         child: Text(deptList[i]['department']),
         value: deptList[i]['department'],

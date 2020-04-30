@@ -127,7 +127,11 @@ class _OrderGoodsTableState extends State<OrderGoodsTable> {
                     ],
                   );
                 }else {
-                  return Container();
+                  return Container(
+                    child: Center(
+                      child: Text('暂无数据'),
+                    ),
+                  );
                 }
               break;
             default:

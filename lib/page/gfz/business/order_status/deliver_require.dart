@@ -6,6 +6,7 @@ import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:wanma_jituan/common/event/submit_event.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/net/code.dart';
+import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -119,13 +120,13 @@ class _DeliverRequireState extends State<DeliverRequire> {
                   //TODO 跳转到发货需求编辑页面
                   NavigatorUtils.goDeliverEdit(context, widget.vbeln);
                 },
-                child: Text('发货需求')
+                child: CommonUtils.whiteText('发货需求'),
             ),
             FlatButton(
                 onPressed: () {
                   _deliverSubmit(context);
                 },
-                child: Text('提交')
+                child: CommonUtils.whiteText('提交'),
             )
           ],
         ),

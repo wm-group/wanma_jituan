@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/dao/data_dao.dart';
+import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
 class OrderDetails extends StatelessWidget {
@@ -18,7 +19,7 @@ class OrderDetails extends StatelessWidget {
                   //TODO 跳转到发货需求页面
                   NavigatorUtils.goDeliverRequire(context, cusId);
                 },
-                child: Text('发货需求')
+                child: CommonUtils.whiteText('发货需求'),
             ),
           ],
         ),

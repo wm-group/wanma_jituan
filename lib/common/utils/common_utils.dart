@@ -80,7 +80,7 @@ class CommonUtils {
     _getContent() {
       switch(flag) {
         case 1:
-          return Text('模块功能变动，重大更新！');
+          return Text('您目前版本已不支持，请下载最新版本app！');
           break;
         case 2:
           return Text('新增修改模块功能！');
@@ -165,6 +165,13 @@ class CommonUtils {
 
   }
 
+  ///白色字体
+  static whiteText(content) {
+    return Text(
+      content,
+      style: WMConstant.middleTextWhite,
+    );
+  }
 
   ///单个底部菜单
   static renderTab(icon, text, {size, color}) {

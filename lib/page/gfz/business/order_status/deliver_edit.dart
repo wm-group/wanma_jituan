@@ -8,6 +8,7 @@ import 'package:wanma_jituan/common/event/submit_event.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
 import 'package:wanma_jituan/common/net/code.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 
 class DeliverEdit extends StatefulWidget {
@@ -122,13 +123,13 @@ class _DeliverEditState extends State<DeliverEdit> {
                 onPressed: () {
                   _deliverSubmit(context, '03', '提交');
                 },
-                child: Text('保存并提交')
+                child: CommonUtils.whiteText('保存并提交'),
             ),
             FlatButton(
                 onPressed: () {
                   _deliverSubmit(context, '01', '保存');
                 },
-                child: Text('保存')
+                child: CommonUtils.whiteText('保存'),
             )
           ],
         ),
