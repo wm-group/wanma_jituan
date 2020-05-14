@@ -12,9 +12,9 @@ import 'package:wanma_jituan/common/style/wm_style.dart';
 import 'package:wanma_jituan/common/utils/common_utils.dart';
 import 'package:wanma_jituan/common/utils/navigator_utils.dart';
 import 'package:wanma_jituan/page/app.dart';
-import 'package:wanma_jituan/page/home_page.dart';
 import 'package:wanma_jituan/page/login_page.dart';
 import 'package:wanma_jituan/page/welcome_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
 void main() {
@@ -72,6 +72,15 @@ class MyApp extends StatelessWidget {
               return MaterialApp(
                 title: '万马集团',
                 theme: store.state.themeData,
+                localizationsDelegates: [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
+                ],
+                supportedLocales: [
+                  const Locale.fromSubtags(languageCode: 'zh'),
+                  const Locale.fromSubtags(languageCode: 'en'),
+                ],
                 routes: {
                   WelcomePage.sName: (context) => WelcomePage(),
                   LoginPage.sName: (context) => CommonLayer(child: LoginPage(),),

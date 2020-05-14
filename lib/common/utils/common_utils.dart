@@ -9,8 +9,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:package_info/package_info.dart';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:date_format/date_format.dart';
 
 class CommonUtils {
 
@@ -171,6 +171,11 @@ class CommonUtils {
       content,
       style: WMConstant.middleTextWhite,
     );
+  }
+
+  ///日期格式化
+  static dateFormat(DateTime date) {
+    return formatDate(date, [yyyy, '-', mm, '-', dd]);
   }
 
   ///单个底部菜单

@@ -1,11 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:wanma_jituan/common/config/config.dart';
 import 'package:wanma_jituan/common/local/local_storage.dart';
-import 'package:wanma_jituan/common/model/app_menu_model.dart';
-import 'package:wanma_jituan/common/model/gfz/order_status_model.dart';
 import 'package:wanma_jituan/common/net/http_manager.dart';
 import 'package:wanma_jituan/common/net/url_constant.dart';
-import 'dart:convert';
 
 ///获取订单状态数据
 class DataDao {
@@ -449,21 +446,6 @@ class DataDao {
     }
     return null;
   }
-
-  // //生产线运行日志
-  // static Future getProductionLine(dept, lineDate,url) async{
-  //   Map<String, dynamic> requestParams = {
-  //  'dept': dept,
-  //  'lineDate': lineDate,
-  //   };
-  //   var res = await HttpManager.netFetch(url, requestParams, null, Options(method: 'post'));
-  //   if(res != null && res.result) {
-  //     return res.data;
-  //   }else {
-  //     return null;
-  //   }
-  // }
-
 
   //异常查询_生产线运行日志_部门列表
   static Future getExceptionProductDept(bukrs) async{

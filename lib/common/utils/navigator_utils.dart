@@ -46,6 +46,14 @@ import 'package:wanma_jituan/page/gfz/reportform/goods_registration/goods_regist
 import 'package:wanma_jituan/page/gfz/reportform/material_storage/material_storage.dart'; 
 import 'package:wanma_jituan/page/gfz/reportform/goods_storage_list/goods_storage_list.dart';
 import 'package:wanma_jituan/page/gfz/reportform/material_storage_list/material_storage_list.dart';
+import 'package:wanma_jituan/page/tl/industry/tl_exception_query/tl_exception_detail.dart';
+import 'package:wanma_jituan/page/tl/industry/tl_exception_query/tl_exception_query.dart';
+import 'package:wanma_jituan/page/tl/industry/tl_inventory/TLInventory.dart';
+import 'package:wanma_jituan/page/tl/industry/tl_list/tl_line_curve.dart';
+import 'package:wanma_jituan/page/tl/industry/tl_list/tl_line_detail.dart';
+import 'package:wanma_jituan/page/tl/industry/tl_list/tl_list.dart';
+import 'package:wanma_jituan/page/tl/industry/tl_month_query/tl_month_query.dart';
+import 'package:wanma_jituan/page/tl/tl_home_page.dart';
 ///导航栏
 class NavigatorUtils {
 
@@ -369,10 +377,10 @@ class NavigatorUtils {
 
 
 //物流跟踪明细
-    static goLogisticsDetailsDetail(BuildContext context,String order_no){
+    static goLogisticsDetailsDetail(BuildContext context,String orderNo){
      Navigator.of(context).push(
            MaterialPageRoute(
-          builder: (context) => LogisticsDetail(order_no: order_no)
+          builder: (context) => LogisticsDetail(order_no: orderNo)
 
            ));
     }
@@ -443,6 +451,79 @@ static goProductionLine(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MaterialStorageList(),
+      ),
+    );
+  }
+
+  ///特缆
+  ///主页
+  static goHomeTL(BuildContext context, String mid) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLHomePage(mid),
+      ),
+    );
+  }
+
+  ///芯线生产量列表
+  static goTLList(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLList(),
+      ),
+    );
+  }
+
+  //芯线详情页
+  static goTLLineDetails(BuildContext context, lineNo, lineName) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLLineDetail(lineNo, lineName),
+      ),
+    );
+  }
+
+  //芯线详情曲线
+  static goTLLineCurve(BuildContext context, lineNo) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLLineCurve(lineNo),
+      ),
+    );
+  }
+
+  ///芯线月产量查询
+  static goTLMonthQuery(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLMonthQuery(),
+      ),
+    );
+  }
+
+  ///芯线异常查询
+  static goTLExceptionQuery(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLExceptionQuery(),
+      ),
+    );
+  }
+
+  ///芯线异常查询明细
+  static goTLExceptionDetail(BuildContext context, lineNo, startDate, endDate) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLExceptionDetail(lineNo, startDate, endDate),
+      ),
+    );
+  }
+
+  ///半成品盘点
+  static goTLInventory(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TLInventory(),
       ),
     );
   }

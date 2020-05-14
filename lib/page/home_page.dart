@@ -129,7 +129,7 @@ class AreaItem extends StatelessWidget {
     for(int i = 0;i<data.length;i++) {
       var item = GridItemWidget(
         text: data[i]['title'],
-        functionName: 'goHomeGfz',
+        functionName: data[i]['functionName'],
         mid: data[i]['id'].toString(),
       );
       items.add(item);

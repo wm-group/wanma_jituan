@@ -3,7 +3,7 @@ import 'package:wanma_jituan/common/json/json_string.dart';
 import 'package:wanma_jituan/widget/grid_item.dart';
 import 'dart:convert';
 
-class ServicePage extends StatelessWidget {
+class TLIndustryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ServicePage extends StatelessWidget {
 
   _getItem() {
     final items = <Widget>[];
-    var data = (json.decode(JsonString.gfzIndustryData))['result'];
+    var data = (json.decode(JsonString.tlIndustryData))['result'];
     for(int i = 0;i<data.length;i++) {
       var item = GridItemWidget(
         text: data[i]['title'],

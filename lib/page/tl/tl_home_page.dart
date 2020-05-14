@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:wanma_jituan/common/config/config.dart';
-import 'package:wanma_jituan/page/Gfz/gfz_order_page.dart';
-import 'package:wanma_jituan/page/gfz/gfz_industry_page.dart';
-import 'package:wanma_jituan/page/gfz/gfz_reportform_page.dart';
+import 'package:wanma_jituan/page/tl/tl_industry_page.dart';
+import 'package:wanma_jituan/page/tl/tl_order_page.dart';
+import 'package:wanma_jituan/page/tl/tl_reportform_page.dart';
 
 ///主页
 
-class GfzHomePage extends StatefulWidget {
+class TLHomePage extends StatefulWidget {
   final String mid;
-  GfzHomePage(this.mid);
+  TLHomePage(this.mid);
 
   @override
-  _GfzHomePageState createState() => _GfzHomePageState();
+  _TLHomePageState createState() => _TLHomePageState();
 }
 
-class _GfzHomePageState extends State<GfzHomePage> with SingleTickerProviderStateMixin{
+class _TLHomePageState extends State<TLHomePage> with SingleTickerProviderStateMixin{
 
   var _currentIndex = 0;
 
@@ -30,9 +30,9 @@ class _GfzHomePageState extends State<GfzHomePage> with SingleTickerProviderStat
   Widget build(BuildContext context) {
 
     List<Widget> _pageList = [
-      GfzOrderPage(),
-      GfzIndustryPage(),
-      GfzReportFormPage(),
+      TLOrderPage(),
+      TLIndustryPage(),
+      TLReportFormPage(),
     ];
 
     return Scaffold(

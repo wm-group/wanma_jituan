@@ -2,9 +2,9 @@
 class UrlConstant {
 
   static const String host = 'http://app.wanmagroup.com:8988/';//正式
-//  static const String host2 = 'http://wms.wanmagroup.com/';//正式
+  static const String host2 = 'http://wms.wanmagroup.com/';//正式
 //  static const String host = 'https://appdownload.wanmagroup.com:8443/';//测试
-  static const String host2 = 'http://itest.wanmagroup.com/';//测试
+//  static const String host2 = 'http://itest.wanmagroup.com/';//测试
   
   ///登陆
   static getLogin() {
@@ -236,6 +236,37 @@ static getUpdateCarGoods(){
 ///原材料入库列表
   static getMaterialStorageList() {
     return '${host2}lot/rtLotInfo/lotEntry/0';
+  }
+
+  ///特缆
+  ///芯线生产量列表
+  static getTLLineList(){
+    return '${host}androidTl/industryTl4/getLine.do';
+  }
+
+  ///芯线详情页
+  static getTLLineDetail(){
+    return '${host}androidTl/industryTl4/getLineStatusDemo.do';
+  }
+
+  ///芯线曲线
+  static getTLLineCurve(){
+    return '${host}androidTl/industryTl4/getLineHisDemoN.do';
+  }
+
+  ///芯线月产量查询
+  static getTLMonthQuery(){
+    return '${host}androidTl/industryTl4/getLineMonthProdDataByYear.do';
+  }
+
+  ///芯线异常查询
+  static getTLExceptionQuery(){
+    return '${host}androidTl/industryTl4/getLineAlertCountByDates.do';
+  }
+
+  ///芯线异常明细
+  static getTLExceptionDetail(){
+    return '${host}androidTl/industryTl4/getLineAlertDetailsByDates.do';
   }
 
   ///菜单接口
