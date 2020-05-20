@@ -282,47 +282,12 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                                     }else {
                                     }
                                   },
-                                  onTap: () {
-//                                    if(data['selected']) {
-//                                      showDialog(context: context, builder: (context) {
-//                                        return AlertDialog(
-//                                          title: Text('提示'),
-//                                          content: Text('请取消勾选后再编辑'),
-//                                          actions: <Widget>[
-//                                            FlatButton(
-//                                              child: Text('确认'),
-//                                              onPressed: () {
-//                                                Navigator.of(context).pop();
-//                                              },
-//                                            ),
-//                                          ],
-//                                        );
-//                                      });
-//                                    }else {
-//                                    }
-                                  },
                                 ),
                                 showEditIcon: true,
                               ),
                               DataCell(
                                 Text('${data['VDATU']}'),
                                 onTap: () {
-//                                  if(data['selected']) {
-//                                    showDialog(context: context, builder: (context) {
-//                                      return AlertDialog(
-//                                        title: Text('提示'),
-//                                        content: Text('请取消勾选后再编辑'),
-//                                        actions: <Widget>[
-//                                          FlatButton(
-//                                            child: Text('确认'),
-//                                            onPressed: () {
-//                                              Navigator.of(context).pop();
-//                                            },
-//                                          ),
-//                                        ],
-//                                      );
-//                                    });
-//                                  }else {
                                     showDatePicker(
                                       context: context,
                                       initialDate: DateTime.parse(data['VDATU']),
@@ -341,7 +306,6 @@ class _DeliverEditTableState extends State<DeliverEditTable> {
                                         }
                                       });
                                     });
-//                                  }
                                 },
                               ),
                             ]

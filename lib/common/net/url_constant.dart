@@ -13,78 +13,78 @@ class UrlConstant {
 
   ///高分子订单状态
   ///订单状态首页
-  static getOrderData() {
-    return '${host}wmgfzandroid/GfzSdService/getOrderData.do';
+  static getOrderData(flag) {
+    return '$host$flag/GfzSdService/getOrderData.do';
   }
 
   ///订单明细
-  static getOrderDetailsData() {
-    return '${host}wmgfzandroid/GfzSdService/getOrderGoodsDetail.do';
+  static getOrderDetailsData(flag) {
+    return '$host$flag/GfzSdService/getOrderGoodsDetail.do';
   }
 
   ///订单物流明细
-  static getOrderGoodsFollow() {
-    return '${host}wmgfzandroid/GfzSdService/getGoodsFollowRecentData.do';
+  static getOrderGoodsFollow(flag) {
+    return '$host$flag/GfzSdService/getGoodsFollowRecentData.do';
   }
 
   ///发货需求明细
-  static getDeliverRequire() {
-    return '${host}wmgfzandroid/GfzSdService/getDeliverHisData.do';
+  static getDeliverRequire(flag) {
+    return '$host$flag/GfzSdService/getDeliverHisData.do';
   }
 
   ///发货需求编辑页
-  static getDeliverEdit() {
-    return '${host}wmgfzandroid/GfzSdService/getDeliverEditData.do';
+  static getDeliverEdit(flag) {
+    return '$host$flag/GfzSdService/getDeliverEditData.do';
   }
 
   ///保存、提交、保存且提交
   ///action = 01 保存
   ///action = 03 提交、保存且提交
-  static deliverRequireSubmit() {
-    return '${host}wmgfzandroid/GfzSdService/saveDeliverData.do';
+  static deliverRequireSubmit(flag) {
+    return '$host$flag/GfzSdService/saveDeliverData.do';
   }
 
   ///历史发货需求
-  static getDeliverHistory() {
-    return '${host}wmgfzandroid/GfzSdService/hisDataQuery.do';
+  static getDeliverHistory(flag) {
+    return '$host$flag/GfzSdService/hisDataQuery.do';
   }
 
   ///高分子发货跟踪
   ///发货跟踪
-  static getDeliverTracking() {
-    return '${host}wmgfzandroid/GfzSdService/fhgzMessage.do';
+  static getDeliverTracking(flag) {
+    return '$host$flag/GfzSdService/fhgzMessage.do';
   }
 
   ///高分子开票情况
   ///未开票
-  static getNoSaleMessage() {
-    return '${host}wmgfzandroid/GfzSdService/nosaledmessage.do';
+  static getNoSaleMessage(flag) {
+    return '$host$flag/GfzSdService/nosaledmessage.do';
   }
 
   ///未开票明细
-  static getNoSaleDetails() {
-    return '${host}wmgfzandroid/GfzSdService/nosaleddetail.do';
+  static getNoSaleDetails(flag) {
+    return '$host$flag/GfzSdService/nosaleddetail.do';
   }
 
   ///已开票
-  static getSaleMessage() {
-    return '${host}wmgfzandroid/GfzSdService/saledmessage.do';
+  static getSaleMessage(flag) {
+    return '$host$flag/GfzSdService/saledmessage.do';
   }
 
   ///已开票明细
-  static getSaleDetails() {
-    return '${host}wmgfzandroid/GfzSdService/saleddetail.do';
+  static getSaleDetails(flag) {
+    return '$host$flag/GfzSdService/saleddetail.do';
   }
 
   ///高分子货款回笼
   ///货款回笼
-  static getPaymentWithdrawal() {
-    return '${host}wmgfzandroid/GfzSdService/hkhl.do';
+  static getPaymentWithdrawal(flag) {
+    return '$host$flag/GfzSdService/hkhl.do';
   }
 
   ///货款回笼明细
-  static getPaymentDetails() {
-    return '${host}wmgfzandroid/GfzSdService/hkhldetail.do';
+  static getPaymentDetails(flag) {
+    return '$host$flag/GfzSdService/hkhldetail.do';
   }
 
   ///高分子基准价
@@ -100,21 +100,21 @@ class UrlConstant {
 
   }
 //发出情况
- static getIssueSituation(){
-   return '${host}wmgfzandroid/GfzSdService/historymessage.do';
+ static getIssueSituation(flag){
+   return '$host$flag/GfzSdService/historymessage.do';
  }
 //发出情况明细
-static getCloseDetails(){
-     return '${host}wmgfzandroid/GfzSdService/historymessagedetail.do';
+static getCloseDetails(flag){
+     return '$host$flag/GfzSdService/historymessagedetail.do';
 
 }
 //应收货款
-static getTradeReceivable(){
-    return '${host}wmgfzandroid/GfzSdService/yshk.do';
+static getTradeReceivable(flag){
+    return '$host$flag/GfzSdService/yshk.do';
 }
 //应收货款明细
-static getTradeDetail(){
-    return '${host}wmgfzandroid/GfzSdService/yshkDetail.do';
+static getTradeDetail(flag){
+    return '$host$flag/GfzSdService/yshkDetail.do';
 }
 //物流跟踪
 static getLogisticsTracking(){
@@ -274,5 +274,4 @@ static getUpdateCarGoods(){
   static updatePwd(){
     return '${host}androidWeb/loginService/changePwdNew.do';
   }
-  
 }

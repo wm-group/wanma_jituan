@@ -12,6 +12,11 @@ abstract class JsonString {
             "title": "特缆",
             "functionName": "goHomeTL",
             "id": 2
+        },
+        {
+            "title": "天屹",
+            "functionName": "goHomeTY",
+            "id": 3
         }
     ],
     "msg": "成功",
@@ -198,7 +203,7 @@ abstract class JsonString {
 }
   ''';
 
-  //特缆工业业务员模块
+  //特缆业务员模块
   static final String tlOrderData ='''
   {
     "result": [
@@ -206,6 +211,76 @@ abstract class JsonString {
             "title": "订单状态",
             "functionName": "goOrderStatus",
             "id": 1
+        },
+        {
+            "title": "应收货款",
+            "functionName": "goTradeReceivable",
+            "id": 8
+        },
+        {
+            "title": "货款回笼",
+            "functionName": "goPaymentWithdrawal",
+            "id": 4
+        },
+        {
+            "title": "开票情况",
+            "functionName": "goSaleMessage",
+            "id": 3
+        },
+        {
+            "title": "发出情况",
+            "functionName": "goIssueSituation",
+            "id": 5
+        },
+        {
+            "title": "发货跟踪",
+            "functionName": "goDeliveryTracking",
+            "id": 2
+        }
+    ],
+    "msg": "成功",
+    "code": 0
+}
+  ''';
+
+  //天屹业务员模块
+  static final String tyOrderData ='''
+  {
+    "result": [
+        {
+            "title": "订单状态",
+            "functionName": "goOrderStatus",
+            "id": 1
+        },
+        {
+            "title": "应收货款",
+            "functionName": "goTradeReceivable",
+            "id": 8
+        },
+        {
+            "title": "货款回笼",
+            "functionName": "goPaymentWithdrawal",
+            "id": 4
+        },
+        {
+            "title": "开票情况",
+            "functionName": "goSaleMessage",
+            "id": 3
+        },
+        {
+            "title": "发出情况",
+            "functionName": "goIssueSituation",
+            "id": 5
+        },
+        {
+            "title": "发货跟踪",
+            "functionName": "goDeliveryTracking",
+            "id": 2
+        },
+        {
+            "title": "半成品盘点",
+            "functionName": "goTYInventory",
+            "id": 7
         }
     ],
     "msg": "成功",

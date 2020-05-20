@@ -54,6 +54,8 @@ import 'package:wanma_jituan/page/tl/industry/tl_list/tl_line_detail.dart';
 import 'package:wanma_jituan/page/tl/industry/tl_list/tl_list.dart';
 import 'package:wanma_jituan/page/tl/industry/tl_month_query/tl_month_query.dart';
 import 'package:wanma_jituan/page/tl/tl_home_page.dart';
+import 'package:wanma_jituan/page/ty/business/ty_inventory/ty_inventory.dart';
+import 'package:wanma_jituan/page/ty/ty_home_page.dart';
 ///导航栏
 class NavigatorUtils {
 
@@ -524,6 +526,25 @@ static goProductionLine(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => TLInventory(),
+      ),
+    );
+  }
+
+  ///天屹
+  ///主页
+  static goHomeTY(BuildContext context, String mid) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TYHomePage(mid),
+      ),
+    );
+  }
+
+  ///天屹半成品盘点
+  static goTYInventory(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TYInventory(),
       ),
     );
   }

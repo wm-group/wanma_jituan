@@ -7,6 +7,11 @@ import 'package:wanma_jituan/common/net/url_constant.dart';
 ///获取订单状态数据
 class DataDao {
 
+  static _getBusiness() async {
+    var _moduleCategory = await LocalStorage.get(Config.MODULE_CATEGORY);
+    return _moduleCategory;
+  }
+
   static Future getAuthority(userName, password) async {
     var url = 'http://app.wanmagroup.com:8988/wmgfzandroid/loginService/subsystem/login.do?userId=$userName&password=$password';
     await HttpManager.netFetch(url, null, null, Options(method: 'get'));
@@ -15,6 +20,8 @@ class DataDao {
   //订单状态首页数据
   static Future getOrderData(bukrs, s_date, e_date) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
       's_date': s_date,
@@ -22,7 +29,7 @@ class DataDao {
     };
 
 //    String url = UrlConstant.getOrderData() + '?bukrs=$bukrs&s_date=$s_date&e_date=$e_date';
-    var res = await HttpManager.netFetch(UrlConstant.getOrderData(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getOrderData(_moduleCategory), requestParams, null, Options(method: 'post'));
 //    OrderStatusModel orderStatusModel;
 //    if(res != null && res.result) {
 //      try{
@@ -42,12 +49,14 @@ class DataDao {
   //订单明细数据
   static Future getOrderDetailsData(bukrs, vbeln) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
       'vbeln': vbeln,
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getOrderDetailsData(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getOrderDetailsData(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -59,13 +68,15 @@ class DataDao {
   //订单物流跟踪数据
   static Future getOrderGoodsData(bukrs, vbeln, posnr) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
       'posnr': posnr,
       'vbeln': vbeln
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getOrderGoodsFollow(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getOrderGoodsFollow(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -92,11 +103,13 @@ class DataDao {
   //发货需求明细
   static Future getDeliverRequireData(vbeln) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'vbeln': vbeln
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getDeliverRequire(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverRequire(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -108,11 +121,13 @@ class DataDao {
   //发货需求编辑页
   static Future getDeliverEditData(vbeln) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'vbeln': vbeln
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getDeliverEdit(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverEdit(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -124,7 +139,9 @@ class DataDao {
   //历史发货需求
   static Future getDeliverHistoryData() async{
 
-    var res = await HttpManager.netFetch(UrlConstant.getDeliverHistory(), null, null, Options(method: 'post'));
+    var _moduleCategory = await _getBusiness();
+
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverHistory(_moduleCategory), null, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -150,10 +167,12 @@ class DataDao {
 
   //发出情况数据
   static Future getIssueSituationData(bukrs) async{
+
+    var _moduleCategory = await _getBusiness();
     Map<String,dynamic> requestParams = {
       'bukrs':bukrs,
     };
-    var res = await HttpManager.netFetch(UrlConstant.getIssueSituation(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getIssueSituation(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -165,13 +184,15 @@ class DataDao {
   //发货需求编辑页保存功能
   static Future deliverEditSave(userName, action, data) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'user': userName,
       'action': action,
       'data': data
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.deliverRequireSubmit(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.deliverRequireSubmit(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -183,12 +204,14 @@ class DataDao {
 
   //发出情况明细数据
   static Future getCloseDetailsData(bukrs,date,kunnr) async{
+
+    var _moduleCategory = await _getBusiness();
     Map<String,dynamic> requestParams = {
       'Bukrs':bukrs,
       'date':date,
       'kunnr':kunnr,
     };
-    var res = await HttpManager.netFetch(UrlConstant.getCloseDetails(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getCloseDetails(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -200,11 +223,13 @@ class DataDao {
   //发货跟踪数据
   static Future getDeliveryTracking(bukrs) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getDeliverTracking(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getDeliverTracking(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -216,12 +241,14 @@ class DataDao {
 
   //应收货款数据
   static Future getTradeReceivableData(bukrs,date1,date2) async{
+
+    var _moduleCategory = await _getBusiness();
     Map<String,dynamic> requestParams = {
       'bukrs':bukrs,
       's_date':date1,
       'e_date':date2,
     };
-    var res = await HttpManager.netFetch(UrlConstant.getTradeReceivable(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getTradeReceivable(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -233,11 +260,13 @@ class DataDao {
   //未开票
   static Future getNoSaleMessage(bukrs) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getNoSaleMessage(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getNoSaleMessage(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -248,11 +277,13 @@ class DataDao {
 
   //应收货款明细数据
   static Future getTradeDetailData(bukrs,kunnr) async{
+
+    var _moduleCategory = await _getBusiness();
     Map<String,dynamic> requestParams = {
       'bukrs':bukrs,
       'kunnr':kunnr,
     };
-    var res = await HttpManager.netFetch(UrlConstant.getTradeDetail(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getTradeDetail(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -264,11 +295,13 @@ class DataDao {
   //已开票
   static Future getSaleMessage(bukrs) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getSaleMessage(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getSaleMessage(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -296,13 +329,15 @@ class DataDao {
   //未开票明细
   static Future getNoSaleDetails(bukrs, kunnr, fhmonth) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
       'kunnr': kunnr,
       'fhmonth': fhmonth,
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getNoSaleDetails(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getNoSaleDetails(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -330,12 +365,14 @@ class DataDao {
   //已开票明细
   static Future getSaleDetails(bukrs, ticketnum) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
       'ticketnum': ticketnum,
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getSaleDetails(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getSaleDetails(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -349,13 +386,15 @@ class DataDao {
   //货款回笼
   static Future getPaymentWithdrawal(bukrs, sDate, eDate) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
       's_date': sDate,
       'e_date': eDate,
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getPaymentWithdrawal(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getPaymentWithdrawal(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;
@@ -367,6 +406,8 @@ class DataDao {
   //货款回笼明细
   static Future getPaymentDetails(bukrs, sDate, eDate, kunnr) async{
 
+    var _moduleCategory = await _getBusiness();
+
     Map<String, dynamic> requestParams = {
       'bukrs': bukrs,
       's_date': sDate,
@@ -374,7 +415,7 @@ class DataDao {
       'kunnr': kunnr
     };
 
-    var res = await HttpManager.netFetch(UrlConstant.getPaymentDetails(), requestParams, null, Options(method: 'post'));
+    var res = await HttpManager.netFetch(UrlConstant.getPaymentDetails(_moduleCategory), requestParams, null, Options(method: 'post'));
     if(res != null && res.result) {
       if(res.data != null && res.data != '') {
         return res.data;

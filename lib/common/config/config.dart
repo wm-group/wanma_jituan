@@ -15,6 +15,7 @@ class Config {
   static const SET_KEY = "seting_key";
   static const SERVER_VERSION = "server_version";
   static const APK_ADDRESS = "https://appdownload.wanmagroup.com:8443/androidWeb/download/TST/appdownload.jsp";
+  static const MODULE_CATEGORY = "module_category";
   /// //////////////////////////////////////标题常量/////////////////////////////////// ///
   static const APP_TITLE = "万马集团";
 }

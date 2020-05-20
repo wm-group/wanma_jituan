@@ -63,6 +63,8 @@ dev_dependencies:
   fl_chart: ^0.9.0
   #包信息
   package_info: ^0.4.0+17
+  #扫码
+#  barcode_scan: ^3.0.1
   #多语言
   flutter_localizations:
     sdk: flutter

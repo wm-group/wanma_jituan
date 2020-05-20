@@ -21,6 +21,8 @@ class GridItemWidget extends StatelessWidget {
         switch(functionName) {
           case 'goHomeGfz':
           //材料板块首页
+            await LocalStorage.save(Config.MODULE_CATEGORY, 'wmgfzandroid');
+
             var userName = await LocalStorage.get(Config.USER_NAME_KEY);
             var password = await LocalStorage.get(Config.PW_KEY);
             DataDao.getAuthority(userName, password);
@@ -111,6 +113,8 @@ class GridItemWidget extends StatelessWidget {
         //特缆
           case 'goHomeTL':
           //特缆首页
+            await LocalStorage.save(Config.MODULE_CATEGORY, 'androidTl');
+
             var userName = await LocalStorage.get(Config.USER_NAME_KEY);
             var password = await LocalStorage.get(Config.PW_KEY);
             DataDao.getAuthority(userName, password);
@@ -131,6 +135,20 @@ class GridItemWidget extends StatelessWidget {
         // 半成品盘点
           case 'goTLInventory':
             NavigatorUtils.goTLInventory(context);
+            break;
+        //天屹
+          case 'goHomeTY':
+          //天屹首页
+            await LocalStorage.save(Config.MODULE_CATEGORY, 'androidTl');
+
+            var userName = await LocalStorage.get(Config.USER_NAME_KEY);
+            var password = await LocalStorage.get(Config.PW_KEY);
+            DataDao.getAuthority(userName, password);
+            NavigatorUtils.goHomeTY(context,mid);
+            break;
+        // 半成品盘点
+          case 'goTYInventory':
+            NavigatorUtils.goTYInventory(context);
             break;
           default:
             Scaffold.of(context).showSnackBar(SnackBar(content: Text('暂未开通')));
