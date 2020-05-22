@@ -269,6 +269,17 @@ static getUpdateCarGoods(){
     return '${host}androidTl/industryTl4/getLineAlertDetailsByDates.do';
   }
 
+  ///天屹
+  ///天屹半成品盘点
+  static getTYInventoryMessage(){
+    return '${host2}wm/htWmInventory/getInfoByBarcode/';
+  }
+
+  ///天屹半成品盘点确认
+  static getTYInventorySure(){
+    return '${host2}wm/htWmInventory/confirmResult/';
+  }
+
   ///菜单接口
   ///修改密码
   static updatePwd(){
