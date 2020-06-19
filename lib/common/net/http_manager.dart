@@ -16,7 +16,7 @@ class HttpManager {
   static Dio _dio;
   static BaseOptions orgOption;
 
-  static const int CONNECT_TIMEOUT = 10000;
+  static const int CONNECT_TIMEOUT = 15000;
   static const int RECEIVE_TIMEOUT = 3000;
 
   static Dio createInstance() {

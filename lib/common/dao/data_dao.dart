@@ -100,6 +100,54 @@ class DataDao {
     return null;
   }
 
+  //物料勾选首页数据
+  static Future getMaterialSelection(bukrs) async{
+
+    Map<String, dynamic> requestParams = {
+      'bukrs': bukrs,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.getMaterialSelection(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
+  }
+
+  //物料勾选插入数据
+  static Future MaterialSelectionInsert(matnr) async{
+
+    Map<String, dynamic> requestParams = {
+      'matnr': matnr,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.MaterialSelectionInsert(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
+  }
+
+  //物料勾选删除数据
+  static Future MaterialSelectionDel(matnr) async{
+
+    Map<String, dynamic> requestParams = {
+      'matnr': matnr,
+    };
+
+    var res = await HttpManager.netFetch(UrlConstant.MaterialSelectionDel(), requestParams, null, Options(method: 'post'));
+    if(res != null && res.result) {
+      if(res.data != null && res.data != '') {
+        return res.data;
+      }
+    }
+    return null;
+  }
+
   //发货需求明细
   static Future getDeliverRequireData(vbeln) async{
 

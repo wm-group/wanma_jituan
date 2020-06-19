@@ -94,6 +94,22 @@ class UrlConstant {
 
   }
 
+  ///高分子物料勾选
+  ///首页数据
+  static getMaterialSelection(){
+    return '${host}wmgfzandroid/GfzSdService/wlmessage.do';
+  }
+
+  ///插入数据
+  static MaterialSelectionInsert(){
+    return '${host}wmgfzandroid/GfzSdService/insertwl.do';
+  }
+
+  ///删除数据
+  static MaterialSelectionDel(){
+    return '${host}wmgfzandroid/GfzSdService/delwl.do';
+  }
+
   //目标情况
   static getTargetSituation(){
     return '${host}wmgfzandroid/GfzSdService/targetmessage.do';

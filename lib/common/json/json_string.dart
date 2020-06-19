@@ -7,22 +7,23 @@ abstract class JsonString {
             "title": "材料板块",
             "functionName": "goHomeGfz",
             "id": 1
-        },
-        {
-            "title": "特缆",
-            "functionName": "goHomeTL",
-            "id": 2
-        },
-        {
-            "title": "天屹",
-            "functionName": "goHomeTY",
-            "id": 3
         }
     ],
     "msg": "成功",
     "code": 0
 }
   ''';
+//  ,
+//  {
+//  "title": "特缆",
+//  "functionName": "goHomeTL",
+//  "id": 2
+//  },
+//  {
+//  "title": "天屹",
+//  "functionName": "goHomeTY",
+//  "id": 3
+//  }
 
   //高分子业务员模块
   static final String gfzOrderData ='''

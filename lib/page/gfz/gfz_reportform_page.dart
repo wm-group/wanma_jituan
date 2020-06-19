@@ -22,7 +22,7 @@ class GfzReportFormPage extends StatelessWidget {
   _getItem() {
     final items = <Widget>[];
     var data = (json.decode(JsonString.gfzReportFormData))['result'];
-    for(int i = 0;i<data.length;i++) {
+    for(int i = 0;i<0;i++) {
       var item = GridItemWidget(
         text: data[i]['title'],
         functionName: data[i]['functionName'],

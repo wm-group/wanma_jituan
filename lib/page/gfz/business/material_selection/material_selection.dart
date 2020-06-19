@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:wanma_jituan/common/dao/data_dao.dart';
 import 'package:wanma_jituan/common/json/json_string.dart';
 import 'package:wanma_jituan/common/style/wm_style.dart';
 
@@ -16,55 +17,87 @@ class _MaterialSelectionState extends State<MaterialSelection> {
 
   List dataList;
 
-  //构造方法，调用这个类的时候自动执行
-  _MaterialSelectionState(){
+  bool isLoading = true;
+
+  Future _getMaterialSelection() async {
+    String bukrs = '1008';
+    var data = await DataDao.getMaterialSelection(bukrs);
+    return data;
+  }
+
+  Future _MaterialSelectionInsert(matnr) async {
+    var data = await DataDao.MaterialSelectionInsert(matnr);
+    return data;
+  }
+
+  Future _MaterialSelectionDel(matnr) async {
+    var data = await DataDao.MaterialSelectionDel(matnr);
+    return data;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     List tempList = List();
     mList = List();
     childList = List();
     expandStateList=new List();
-    dataList = JsonDecoder().convert(JsonString.tempMaterialData);
-    for(int i = 0;i < dataList.length;i ++) {
-      if(i == 0) {
-        tempList.add(dataList[i]['wlzms']);
-      }else if(dataList[i]['wlzms'] != dataList[i-1]['wlzms']) {
-        tempList.add(dataList[i]['wlzms']);
+//    dataList = JsonDecoder().convert(JsonString.tempMaterialData);
+    _getMaterialSelection().then((value) {
+      dataList = value;
+      for(int i = 0;i < dataList.length;i ++) {
+        if(i == 0) {
+          tempList.add(dataList[i]['wlzms']);
+        }else if(dataList[i]['wlzms'] != dataList[i-1]['wlzms']) {
+          tempList.add(dataList[i]['wlzms']);
+        }
       }
-    }
-    Map map;
-    for(int i = 0;i < tempList.length; i++) {
-      map = HashMap<String, dynamic>();
-      map['index'] = i;
-      map['data'] = tempList[i];
-      map['flag'] = true;
-      List tempChildList = List();
-      for(Map m in dataList) {
-        if(tempList[i] == m['wlzms']) {
+      Map map;
+      for(int i = 0;i < tempList.length; i++) {
+        map = HashMap<String, dynamic>();
+        map['index'] = i;
+        map['data'] = tempList[i];
+        map['flag'] = true;
+        List tempChildList = List();
+        for(Map m in dataList) {
+          if(tempList[i] == m['wlzms']) {
 //          HashMap map = new HashMap<String,String>();
 //          map['wlzms'] = m['wlzms'];
 //          map['wlz'] = m['wlz'];
 //          map['wlmc'] = m['wlmc'];
 //          map['flag'] = m['flag'];
-          tempChildList.add(m);
+            tempChildList.add(m);
+          }
         }
-      }
-      expandStateList.add(ExpandStateBean(i,false));
-      ///有勾选的自动展开，子数据重复，暂时关闭
+        expandStateList.add(ExpandStateBean(i,false));
+        ///有勾选的自动展开，子数据重复，暂时关闭
 //      for(Map m in tempChildList) {
 //        if(m['flag'] == '1') {
 //          expandStateList.add(ExpandStateBean(i,true));
 //          break;
 //        }
 //      }
-      for(Map m in tempChildList) {
-        if(m['flag'] == '0') {
-          map['flag'] = false;
-          break;
+        for(Map m in tempChildList) {
+          if(m['flag'] == '0') {
+            map['flag'] = false;
+            break;
+          }
         }
+        mList.add(map);
+        childList.add(tempChildList);
       }
-      mList.add(map);
-      childList.add(tempChildList);
-    }
+
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
+
+  //构造方法，调用这个类的时候自动执行
+//  _MaterialSelectionState(){
+//
+//  }
 
   //修改展开与闭合的内部方法
   _setCurrentIndex(int index,isExpand){
@@ -86,7 +119,10 @@ class _MaterialSelectionState extends State<MaterialSelection> {
         title: Text('物料勾选'),
       ),
       //加入可滚动组件(ExpansionPanelList必须使用可滚动的组件)
-      body: SingleChildScrollView(
+      body: isLoading ? Center(
+        child: CircularProgressIndicator(),
+      ) :
+      SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
@@ -115,12 +151,14 @@ class _MaterialSelectionState extends State<MaterialSelection> {
                         title: Text(tempMap['data']),
                         value: tempMap['flag'],
                         onChanged: (value) {
-                          setState(() {
+                          setState(() async {
                             //TODO 调用插入删除接口
                             for(Map m in tempList) {
                               if(value) {
+//                                await _MaterialSelectionInsert(m['wlz']);
                                 m['flag'] = '1';
                               }else {
+//                                await _MaterialSelectionDel(m['wlz']);
                                 m['flag'] = '0';
                               }
                             }
@@ -149,8 +187,8 @@ class _MaterialSelectionState extends State<MaterialSelection> {
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(tempList[index]['wlzms']),
-                                    Text(tempList[index]['wlmc']),
+                                    Text(tempList[index]['wlzms'], style: TextStyle(fontSize: 13),),
+                                    Text(tempList[index]['wlmc'], style: TextStyle(fontSize: 13),),
                                     Text('')
                                   ],
                                 ),
